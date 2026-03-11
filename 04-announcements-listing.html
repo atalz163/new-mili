@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Announcements — Mili Mehwar</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            green:    { 900: '#0D3B22', 700: '#1B5E3B', 500: '#2D7A52', 100: '#E8F5ED' },
+            red:      { 700: '#C62828', 500: '#D84040' },
+            gold:     { 700: '#B8860B', 400: '#D4A017', 100: '#FDF5DC' },
+            charcoal: { DEFAULT: '#1E1E1E', light: '#2C2C2C' },
+            stone:    { 800: '#302B24', 700: '#3D3630', 600: '#5C5448', 400: '#968E7E', 200: '#CEC7B8', 100: '#E8E2D9' },
+            cream:    '#EDE8DF',
+            offwhite: '#F8F5F0',
+            ink:      '#1A1410',
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            body:    ['"Source Serif 4"', 'Georgia', 'serif'],
+            arabic:  ['"Noto Naskh Arabic"', 'serif'],
+          },
+          boxShadow: {
+            gold: '0 4px 24px rgba(184,134,11,0.28)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    body { font-family: 'Source Serif 4', Georgia, serif; }
+    [dir="rtl"] { font-family: 'Noto Naskh Arabic', serif; }
+
+    .dropdown-menu {
+      opacity: 0; transform: translateY(-4px); pointer-events: none;
+      transition: opacity 150ms ease 100ms, transform 150ms ease 100ms;
+    }
+    .dropdown-parent:hover .dropdown-menu {
+      opacity: 1; transform: translateY(0); pointer-events: auto;
+      transition: opacity 150ms ease 0ms, transform 150ms ease 0ms;
+    }
+    .dropdown-menu::before { content: ''; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
+    .nav-active::after { content: ''; position: absolute; bottom: -16px; left: 12px; right: 12px; height: 2px; background: #D4A017; border-radius: 9999px; }
+
+    .card-hover { transition: transform 250ms cubic-bezier(0.16,1,0.3,1), box-shadow 250ms cubic-bezier(0.16,1,0.3,1); }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(26,20,16,0.12); }
+    .card-img-wrap { overflow: hidden; }
+    .card-img-wrap img { transition: transform 600ms cubic-bezier(0.16,1,0.3,1); }
+    .card-hover:hover .card-img-wrap img { transform: scale(1.04); }
+
+    .read-more { position: relative; display: inline-flex; align-items: center; gap: 6px; }
+    .read-more::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 0; height: 1px; background: #1B5E3B; transition: width 200ms ease; }
+    .read-more:hover::after { width: 100%; }
+
+    .footer-link::before { content: ''; display: inline-block; width: 12px; height: 1px; background: #B8860B; margin-right: 8px; vertical-align: middle; flex-shrink: 0; transition: width 200ms ease; }
+    .footer-link:hover::before { width: 20px; }
+
+    /* Filter pill active state */
+    .filter-pill { transition: all 150ms ease; cursor: pointer; }
+    .filter-pill.active { background: #1B5E3B; color: #fff; border-color: #1B5E3B; }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 500ms ease, transform 500ms cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 80ms; }
+    .reveal-delay-2 { transition-delay: 160ms; }
+    .reveal-delay-3 { transition-delay: 240ms; }
+
+    #mobileDrawer   { transition: transform 280ms cubic-bezier(0.16,1,0.3,1); }
+    #mobileBackdrop { transition: opacity 280ms ease; }
+    #scrollProgress { transition: width 80ms linear; }
+  </style>
+</head>
+
+<body class="bg-offwhite text-ink antialiased">
+
+  <div id="scrollProgress" class="fixed top-0 left-0 h-[3px] w-0 bg-gradient-to-r from-gold-700 to-gold-400 z-[999] pointer-events-none" aria-hidden="true"></div>
+
+  <!-- TOPBAR -->
+  <div class="bg-ink h-9 flex items-center">
+    <div class="max-w-[1280px] mx-auto px-6 w-full flex items-center justify-between">
+      <div class="flex items-center gap-6">
+        <a href="mailto:info@milimehwar.org" class="flex items-center gap-1.5 text-stone-400 text-xs tracking-wide hover:text-white transition-colors duration-150">
+          <svg class="w-3 h-3 opacity-70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          info@milimehwar.org
+        </a>
+        <span class="hidden md:flex items-center gap-1.5 text-stone-400 text-xs">
+          <svg class="w-3 h-3 opacity-70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          milimehwar.org
+        </span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://twitter.com/milimehwar" target="_blank" rel="noopener" aria-label="X" class="text-stone-400 hover:text-white transition-colors duration-150"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.258 5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://facebook.com/milimehwar" target="_blank" rel="noopener" aria-label="Facebook" class="text-stone-400 hover:text-white transition-colors duration-150"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://youtube.com/@milimehwar" target="_blank" rel="noopener" aria-label="YouTube" class="text-stone-400 hover:text-white transition-colors duration-150"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <header>
+    <nav id="mainNav" class="bg-charcoal border-b-2 border-gold-700 sticky top-0 z-[200] h-[68px] flex items-center transition-shadow duration-300">
+      <div class="max-w-[1280px] mx-auto px-6 w-full flex items-center justify-between gap-8">
+        <a href="/en" class="flex items-center gap-3 shrink-0" aria-label="Mili Mehwar Home">
+          <div class="w-[42px] h-[42px] rounded-full bg-white/10 border-2 border-gold-400 flex items-center justify-center shadow-gold shrink-0">
+            <img src="/images/logo.svg" class="w-7 h-7 object-contain" alt="" style="filter:brightness(0) invert(1);" />
+          </div>
+          <div>
+            <div class="font-display font-bold text-xl text-white leading-none tracking-tight">Mili<span class="text-gold-400">Mehwar</span></div>
+            <span class="text-[9px] tracking-[0.18em] uppercase text-stone-400 block mt-0.5">Afghan National Movement</span>
+          </div>
+        </a>
+        <ul class="hidden lg:flex items-center gap-1 flex-1 justify-center" role="list">
+          <li><a href="/en" class="px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] transition-all duration-150 block">Home</a></li>
+          <li><a href="/en/announcements" class="nav-active relative px-3 py-2 text-gold-400 text-sm font-medium rounded">Announcements</a></li>
+          <li><a href="/en/reports" class="px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] transition-all duration-150 block">Reports</a></li>
+          <li><a href="/en/articles" class="px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] transition-all duration-150 block">Articles</a></li>
+          <li class="dropdown-parent relative">
+            <button class="flex items-center gap-1 px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] transition-all duration-150" aria-haspopup="true" aria-expanded="false">
+              Gallery <svg class="w-3 h-3 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 min-w-[200px] bg-charcoal-light border border-white/[0.08] border-t-2 border-t-gold-700 rounded-b-xl shadow-2xl pt-3 pb-2 z-50" role="menu">
+              <li><a href="/en/gallery/photos" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photo Gallery</a></li>
+              <li><a href="/en/gallery/videos" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Video Gallery</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-parent relative">
+            <button class="flex items-center gap-1 px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] transition-all duration-150" aria-haspopup="true" aria-expanded="false">
+              About Us <svg class="w-3 h-3 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 min-w-[220px] bg-charcoal-light border border-white/[0.08] border-t-2 border-t-gold-700 rounded-b-xl shadow-2xl pt-3 pb-2 z-50" role="menu">
+              <li><a href="/en/about/mission" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Our Mission</a></li>
+              <li><a href="/en/about/pioneers" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Pioneers</a></li>
+              <li><hr class="border-white/[0.06] my-1 mx-4" /></li>
+              <li><a href="/en/about/constitution" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Constitution</a></li>
+              <li><a href="/en/about/why-mili-mehwar" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Why Mili Mehwar?</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-parent relative">
+            <button class="flex items-center gap-1 px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] transition-all duration-150" aria-haspopup="true" aria-expanded="false">
+              Contact <svg class="w-3 h-3 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 min-w-[200px] bg-charcoal-light border border-white/[0.08] border-t-2 border-t-gold-700 rounded-b-xl shadow-2xl pt-3 pb-2 z-50" role="menu">
+              <li><a href="/en/contact" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Contact Us</a></li>
+              <li><a href="/en/join" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>Join the Movement</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="flex items-center gap-3 shrink-0">
+          <div class="hidden lg:flex items-center gap-1" role="group" aria-label="Language">
+            <button data-lang="en" onclick="switchLang('en')" class="lang-btn px-3 py-[3px] text-xs font-bold tracking-widest uppercase rounded-full border border-gold-700 bg-gold-700/10 text-gold-400 transition-all duration-150" aria-pressed="true">EN</button>
+            <button data-lang="ps" onclick="switchLang('ps')" class="lang-btn px-3 py-[3px] text-sm rounded-full border border-transparent text-stone-400 hover:text-white hover:border-white/20 transition-all duration-150 font-arabic" aria-pressed="false">پښتو</button>
+            <button data-lang="dr" onclick="switchLang('dr')" class="lang-btn px-3 py-[3px] text-sm rounded-full border border-transparent text-stone-400 hover:text-white hover:border-white/20 transition-all duration-150 font-arabic" aria-pressed="false">دری</button>
+          </div>
+          <a href="/en/join" class="hidden lg:inline-flex items-center gap-1.5 px-5 py-2 bg-green-700 hover:bg-green-500 text-white text-xs font-bold tracking-widest uppercase rounded transition-colors duration-150">
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Join Us
+          </a>
+          <button id="hamburgerBtn" onclick="toggleMobileMenu()" class="lg:hidden flex flex-col justify-center gap-[5px] w-9 h-9 p-2 rounded hover:bg-white/[0.08] transition-colors duration-150" aria-label="Open menu" aria-expanded="false">
+            <span id="ham1" class="block h-[1.5px] bg-stone-200 rounded-full transition-all duration-300 origin-center"></span>
+            <span id="ham2" class="block h-[1.5px] bg-stone-200 rounded-full transition-all duration-300"></span>
+            <span id="ham3" class="block h-[1.5px] bg-stone-200 rounded-full transition-all duration-300 origin-center"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="fixed inset-0 z-[190] pointer-events-none" aria-hidden="true">
+    <div id="mobileBackdrop" onclick="closeMobileMenu()" class="absolute inset-0 bg-black/60 opacity-0" aria-hidden="true"></div>
+    <div id="mobileDrawer" class="absolute top-0 right-0 bottom-0 w-[min(320px,88vw)] bg-charcoal border-l border-white/[0.08] translate-x-full flex flex-col overflow-y-auto" role="dialog" aria-modal="true">
+      <div class="flex items-center justify-between px-6 py-5 border-b border-white/[0.08]">
+        <span class="font-display font-bold text-lg text-white">Mili<span class="text-gold-400">Mehwar</span></span>
+        <button onclick="closeMobileMenu()" class="w-8 h-8 flex items-center justify-center text-stone-400 hover:text-white rounded" aria-label="Close menu"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <nav class="flex-1 py-2">
+        <a href="/en" class="flex items-center justify-between px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04] transition-all duration-150">Home</a>
+        <a href="/en/announcements" class="flex items-center justify-between px-6 py-4 text-gold-400 font-medium border-b border-white/[0.05]">Announcements</a>
+        <a href="/en/reports" class="flex items-center justify-between px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04] transition-all duration-150">Reports</a>
+        <a href="/en/articles" class="flex items-center justify-between px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04] transition-all duration-150">Articles</a>
+        <a href="/en/gallery/photos" class="flex items-center justify-between px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04] transition-all duration-150">Photo Gallery</a>
+        <a href="/en/about/mission" class="flex items-center justify-between px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04] transition-all duration-150">About</a>
+        <a href="/en/contact" class="flex items-center justify-between px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04] transition-all duration-150">Contact</a>
+        <div class="px-6 pt-6"><a href="/en/join" class="flex items-center justify-center py-3.5 bg-green-700 hover:bg-green-500 text-white text-sm font-bold tracking-widest uppercase rounded transition-colors duration-150">Join the Movement</a></div>
+      </nav>
+      <div class="flex gap-3 px-6 py-5 border-t border-white/[0.08]">
+        <button onclick="switchLang('en')" class="flex-1 py-3 text-center text-xs font-bold tracking-widest uppercase rounded border border-gold-700 bg-gold-700/15 text-gold-400">EN</button>
+        <button onclick="switchLang('ps')" class="flex-1 py-3 text-center text-sm rounded border border-white/10 bg-white/[0.05] text-stone-400 font-arabic">پښتو</button>
+        <button onclick="switchLang('dr')" class="flex-1 py-3 text-center text-sm rounded border border-white/10 bg-white/[0.05] text-stone-400 font-arabic">دری</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- PAGE HEADER -->
+    <div class="bg-charcoal pt-14 pb-12">
+      <div class="max-w-[1280px] mx-auto px-6">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-2 text-xs text-stone-400 mb-6" aria-label="Breadcrumb">
+          <a href="/en" class="hover:text-stone-200 transition-colors duration-150">Home</a>
+          <svg class="w-3 h-3 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          <span class="text-stone-200">Announcements</span>
+        </nav>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-8 h-[1px] bg-gold-400" aria-hidden="true"></div>
+          <span class="text-gold-400 text-xs font-bold tracking-[0.2em] uppercase">Latest</span>
+        </div>
+        <h1 class="font-display font-black text-white leading-tight" style="font-size:clamp(2rem,4vw,3.2rem);">Announcements</h1>
+        <p class="text-stone-400 mt-3 max-w-xl text-sm leading-relaxed">News, statements, and updates from Mili Mehwar and the national movement.</p>
+      </div>
+    </div>
+    <!-- Afghan flag stripe -->
+    <div class="flex h-[4px]" aria-hidden="true">
+      <div class="flex-1" style="background:#111;"></div>
+      <div class="flex-1 bg-red-700"></div>
+      <div class="flex-1 bg-green-700"></div>
+    </div>
+
+    <!-- FILTER + SEARCH BAR -->
+    <div class="bg-white border-b border-stone-100 sticky top-[68px] z-[100]">
+      <div class="max-w-[1280px] mx-auto px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+
+        <!-- Category filters -->
+        <div class="flex items-center gap-2 flex-wrap" role="group" aria-label="Filter by category">
+          <button onclick="filterCards('all', this)" class="filter-pill active px-4 py-1.5 text-xs font-bold tracking-widest uppercase rounded-full border border-green-700 text-white bg-green-700">All</button>
+          <button onclick="filterCards('announcement', this)" class="filter-pill px-4 py-1.5 text-xs font-bold tracking-widest uppercase rounded-full border border-stone-200 text-stone-600 hover:border-green-700 hover:text-green-700">Announcements</button>
+          <button onclick="filterCards('report', this)" class="filter-pill px-4 py-1.5 text-xs font-bold tracking-widest uppercase rounded-full border border-stone-200 text-stone-600 hover:border-green-700 hover:text-green-700">Reports</button>
+          <button onclick="filterCards('statement', this)" class="filter-pill px-4 py-1.5 text-xs font-bold tracking-widest uppercase rounded-full border border-stone-200 text-stone-600 hover:border-green-700 hover:text-green-700">Statements</button>
+        </div>
+
+        <!-- Search -->
+        <div class="relative shrink-0">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input
+            type="search"
+            placeholder="Search announcements…"
+            class="pl-9 pr-4 py-2 text-sm bg-offwhite border border-stone-200 rounded-full focus:outline-none focus:border-green-700 focus:ring-2 focus:ring-green-700/20 w-full sm:w-64 transition-all duration-150"
+            oninput="searchCards(this.value)"
+            aria-label="Search announcements"
+          />
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CARDS GRID -->
+    <section class="py-16 bg-offwhite">
+      <div class="max-w-[1280px] mx-auto px-6">
+
+        <!-- Results count -->
+        <p id="resultsCount" class="text-stone-400 text-xs tracking-wide mb-8">Showing <span id="countNum">8</span> results</p>
+
+        <div id="cardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Card 1 — featured, with image -->
+          <article class="reveal card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col" data-category="announcement" data-title="national dialogue sacramento california">
+            <div class="card-img-wrap relative" style="aspect-ratio:16/9;">
+              <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=700&q=80" alt="" class="w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+              <span class="absolute top-4 left-4 bg-green-700 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">Featured</span>
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-red-700 text-[10px] font-bold tracking-widest uppercase">Announcement</span>
+                <span class="text-stone-400 text-xs">Aug 9, 2025</span>
+              </div>
+              <h2 class="font-display font-bold text-ink text-xl leading-snug mb-3 flex-1">
+                National Dialogue — Sacramento, California
+              </h2>
+              <p class="text-stone-600 text-sm leading-relaxed mb-5 line-clamp-3">
+                Following sessions in London, Berlin, Birmingham, and Cologne, the National Dialogue/Meli Maraka was held in Sacramento with academics, political and cultural figures in attendance.
+              </p>
+              <a href="/en/announcements/1" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150">
+                Read More <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 2 — with image -->
+          <article class="reveal reveal-delay-1 card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col" data-category="announcement" data-title="national dialogue birmingham uk">
+            <div class="card-img-wrap" style="aspect-ratio:16/9;">
+              <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=700&q=80" alt="" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-red-700 text-[10px] font-bold tracking-widest uppercase">Announcement</span>
+                <span class="text-stone-400 text-xs">Jul 10, 2025</span>
+              </div>
+              <h2 class="font-display font-bold text-ink text-xl leading-snug mb-3 flex-1">
+                National Dialogue Session Held in Birmingham, UK
+              </h2>
+              <p class="text-stone-600 text-sm leading-relaxed mb-5 line-clamp-3">
+                The Birmingham session brought together Afghan community leaders from across the UK to discuss pathways to national reconciliation and sovereignty.
+              </p>
+              <a href="/en/announcements/2" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150">
+                Read More <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 3 — NO image -->
+          <article class="reveal reveal-delay-2 card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col" data-category="statement" data-title="statement on international day of peace">
+            <div class="h-1.5 bg-gradient-to-r from-gold-700 to-gold-400"></div>
+            <div class="p-6 flex flex-col flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-gold-700 text-[10px] font-bold tracking-widest uppercase">Statement</span>
+                <span class="text-stone-400 text-xs">Sep 21, 2025</span>
+              </div>
+              <h2 class="font-display font-bold text-ink text-xl leading-snug mb-3 flex-1">
+                Mili Mehwar Statement on the International Day of Peace
+              </h2>
+              <p class="text-stone-600 text-sm leading-relaxed mb-5 line-clamp-3">
+                On this International Day of Peace, Mili Mehwar reaffirms its commitment to a peaceful, negotiated, and inclusive political settlement for Afghanistan.
+              </p>
+              <a href="/en/announcements/3" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150">
+                Read More <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 4 — with image -->
+          <article class="reveal card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col" data-category="report" data-title="london national dialogue report outcomes">
+            <div class="card-img-wrap" style="aspect-ratio:16/9;">
+              <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=700&q=80" alt="" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-gold-700 text-[10px] font-bold tracking-widest uppercase">Report</span>
+                <span class="text-stone-400 text-xs">Jun 15, 2025</span>
+              </div>
+              <h2 class="font-display font-bold text-ink text-xl leading-snug mb-3 flex-1">
+                London National Dialogue — Full Outcomes Report
+              </h2>
+              <p class="text-stone-600 text-sm leading-relaxed mb-5 line-clamp-3">
+                The comprehensive outcomes report from the London session, covering all working groups and recommendations submitted by participants across political and civil society.
+              </p>
+              <a href="/en/announcements/4" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150">
+                Read More <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 5 — NO image -->
+          <article class="reveal reveal-delay-1 card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col" data-category="statement" data-title="statement cologne germany session">
+            <div class="h-1.5 bg-gradient-to-r from-gold-700 to-gold-400"></div>
+            <div class="p-6 flex flex-col flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-gold-700 text-[10px] font-bold tracking-widest uppercase">Statement</span>
+                <span class="text-stone-400 text-xs">May 30, 2025</span>
+              </div>
+              <h2 class="font-display font-bold text-ink text-xl leading-snug mb-3 flex-1">
+                Joint Statement Following the Cologne Dialogue Session
+              </h2>
+              <p class="text-stone-600 text-sm leading-relaxed mb-5 line-clamp-3">
+                Participants in the Cologne national dialogue issued a joint statement calling for an inclusive political process under UN facilitation and Afghan leadership.
+              </p>
+              <a href="/en/announcements/5" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150">
+                Read More <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 6 — with image -->
+          <article class="reveal reveal-delay-2 card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col" data-category="announcement" data-title="berlin national dialogue germany focus unity">
+            <div class="card-img-wrap" style="aspect-ratio:16/9;">
+              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=700&q=80" alt="" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-red-700 text-[10px] font-bold tracking-widest uppercase">Announcement</span>
+                <span class="text-stone-400 text-xs">May 8, 2025</span>
+              </div>
+              <h2 class="font-display font-bold text-ink text-xl leading-snug mb-3 flex-1">
+                National Dialogue — Berlin: Focus on National Unity and Peace
+              </h2>
+              <p class="text-stone-600 text-sm leading-relaxed mb-5 line-clamp-3">
+                Over 60 participants gathered in Berlin for the fourth national dialogue session, with working groups focusing on governance, civil society, and diaspora engagement.
+              </p>
+              <a href="/en/announcements/6" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150">
+                Read More <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 7 — NO image -->
+          <article class="reveal card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col" data-category="report" data-title="annual report 2024 mili mehwar activities">
+            <div class="h-1.5 bg-gradient-to-r from-gold-700 to-gold-400"></div>
+            <div class="p-6 flex flex-col flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-gold-700 text-[10px] font-bold tracking-widest uppercase">Report</span>
+                <span class="text-stone-400 text-xs">Jan 15, 2025</span>
+              </div>
+              <h2 class="font-display font-bold text-ink text-xl leading-snug mb-3 flex-1">
+                Mili Mehwar Annual Activity Report — 2024
+              </h2>
+              <p class="text-stone-600 text-sm leading-relaxed mb-5 line-clamp-3">
+                A full review of Mili Mehwar's activities, dialogues, publications, and community engagements throughout 2024 across multiple countries.
+              </p>
+              <a href="/en/announcements/7" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150">
+                Read More <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 8 — with image -->
+          <article class="reveal reveal-delay-1 card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col" data-category="announcement" data-title="founding anniversary mili mehwar 2019">
+            <div class="card-img-wrap" style="aspect-ratio:16/9;">
+              <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=700&q=80" alt="" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-red-700 text-[10px] font-bold tracking-widest uppercase">Announcement</span>
+                <span class="text-stone-400 text-xs">Mar 20, 2025</span>
+              </div>
+              <h2 class="font-display font-bold text-ink text-xl leading-snug mb-3 flex-1">
+                Marking Six Years Since the Founding of Mili Mehwar
+              </h2>
+              <p class="text-stone-600 text-sm leading-relaxed mb-5 line-clamp-3">
+                Six years after its founding, Mili Mehwar reflects on its journey, its achievements, and its renewed commitment to the Afghan people and the cause of national unity.
+              </p>
+              <a href="/en/announcements/8" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150">
+                Read More <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Empty state (hidden by default, shown by JS when no results) -->
+        <div id="emptyState" class="hidden text-center py-24">
+          <svg class="w-12 h-12 text-stone-200 mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <p class="text-stone-400 font-display font-bold text-xl mb-2">No results found</p>
+          <p class="text-stone-400 text-sm">Try a different search term or category.</p>
+        </div>
+
+        <!-- Pagination -->
+        <nav class="flex items-center justify-center gap-2 mt-14" aria-label="Pagination">
+          <button class="w-10 h-10 rounded-lg border border-stone-200 flex items-center justify-center text-stone-400 hover:border-green-700 hover:text-green-700 transition-all duration-150 disabled:opacity-30" disabled aria-label="Previous page">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="w-10 h-10 rounded-lg bg-green-700 text-white font-bold text-sm" aria-current="page" aria-label="Page 1">1</button>
+          <button class="w-10 h-10 rounded-lg border border-stone-200 text-stone-600 font-bold text-sm hover:border-green-700 hover:text-green-700 transition-all duration-150" aria-label="Page 2">2</button>
+          <button class="w-10 h-10 rounded-lg border border-stone-200 text-stone-600 font-bold text-sm hover:border-green-700 hover:text-green-700 transition-all duration-150" aria-label="Page 3">3</button>
+          <span class="text-stone-400 text-sm px-1">…</span>
+          <button class="w-10 h-10 rounded-lg border border-stone-200 text-stone-600 font-bold text-sm hover:border-green-700 hover:text-green-700 transition-all duration-150" aria-label="Page 8">8</button>
+          <button class="w-10 h-10 rounded-lg border border-stone-200 flex items-center justify-center text-stone-600 hover:border-green-700 hover:text-green-700 transition-all duration-150" aria-label="Next page">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </nav>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="flex h-[5px]" aria-hidden="true">
+      <div class="flex-1" style="background:#111;"></div>
+      <div class="flex-1 bg-red-700"></div>
+      <div class="flex-1 bg-green-700"></div>
+    </div>
+    <div class="bg-charcoal text-stone-200">
+      <div class="max-w-[1280px] mx-auto px-6 pt-16 pb-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+        <div class="sm:col-span-2 lg:col-span-1">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-full bg-white/10 border-2 border-gold-400 flex items-center justify-center shrink-0" aria-hidden="true">🏛️</div>
+            <div class="font-display font-bold text-lg text-white leading-none">Mili<span class="text-gold-400">Mehwar</span></div>
+          </div>
+          <p class="text-sm text-stone-400 leading-relaxed mb-6 max-w-xs">An Afghan national movement for unity, sovereignty, and democratic renewal.</p>
+          <div class="bg-green-700/15 border border-green-700/35 rounded-xl p-5">
+            <div class="font-display font-bold text-white text-base mb-1">Want to join us?</div>
+            <p class="text-xs text-stone-400 mb-4 leading-relaxed">Complete the online form to become a member.</p>
+            <a href="/en/join" class="inline-flex items-center gap-2 px-5 py-2.5 bg-green-700 hover:bg-green-500 text-white text-xs font-bold tracking-widest uppercase rounded transition-colors duration-150">Join Online</a>
+          </div>
+        </div>
+        <nav aria-label="Quick links">
+          <h4 class="font-display font-bold text-white text-base mb-5 pb-3 border-b border-white/[0.08]">Quick Links</h4>
+          <ul class="flex flex-col gap-3" role="list">
+            <li><a href="/en/announcements" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Announcements</a></li>
+            <li><a href="/en/reports" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Reports</a></li>
+            <li><a href="/en/articles" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Articles</a></li>
+            <li><a href="/en/gallery/photos" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Photo Gallery</a></li>
+            <li><a href="/en/gallery/videos" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Video Gallery</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="About">
+          <h4 class="font-display font-bold text-white text-base mb-5 pb-3 border-b border-white/[0.08]">About</h4>
+          <ul class="flex flex-col gap-3" role="list">
+            <li><a href="/en/about/mission" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Our Mission</a></li>
+            <li><a href="/en/about/pioneers" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Pioneers</a></li>
+            <li><a href="/en/about/constitution" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Constitution</a></li>
+            <li><a href="/en/about/why-mili-mehwar" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Why Mili Mehwar?</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Get involved">
+          <h4 class="font-display font-bold text-white text-base mb-5 pb-3 border-b border-white/[0.08]">Get Involved</h4>
+          <ul class="flex flex-col gap-3" role="list">
+            <li><a href="/en/join" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Join the Movement</a></li>
+            <li><a href="/en/contact" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Contact Us</a></li>
+            <li><a href="mailto:info@milimehwar.org" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">info@milimehwar.org</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="max-w-[1280px] mx-auto px-6 py-5 border-t border-white/[0.07] flex flex-wrap items-center justify-between gap-4">
+        <p class="text-xs text-stone-600 tracking-wide">Copyright &copy; <span id="footerYear"></span> MiliMehwar — All rights reserved.</p>
+        <nav class="flex gap-6"><a href="/en/privacy" class="text-xs text-stone-600 hover:text-stone-200 transition-colors duration-150">Privacy Policy</a><a href="/en/terms" class="text-xs text-stone-600 hover:text-stone-200 transition-colors duration-150">Terms of Use</a></nav>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-8 right-8 w-11 h-11 bg-green-700 hover:bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg opacity-0 pointer-events-none -translate-y-3 transition-all duration-300 z-50" aria-label="Back to top">
+    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script>
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+    window.addEventListener('scroll', () => {
+      const sy = window.scrollY;
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      document.getElementById('scrollProgress').style.width = (docH > 0 ? (sy / docH) * 100 : 0) + '%';
+      document.getElementById('mainNav').classList.toggle('shadow-[0_4px_32px_rgba(0,0,0,0.45)]', sy > 10);
+      const btt = document.getElementById('backToTop');
+      btt.classList.toggle('opacity-0', sy <= 400);
+      btt.classList.toggle('pointer-events-none', sy <= 400);
+      btt.classList.toggle('-translate-y-3', sy <= 400);
+      btt.classList.toggle('opacity-100', sy > 400);
+      btt.classList.toggle('pointer-events-auto', sy > 400);
+      btt.classList.toggle('translate-y-0', sy > 400);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Filter by category
+    let activeCategory = 'all';
+    let activeSearch   = '';
+
+    function filterCards(category, btn) {
+      activeCategory = category;
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters();
+    }
+
+    function searchCards(val) {
+      activeSearch = val.toLowerCase().trim();
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const cards  = document.querySelectorAll('#cardsGrid article');
+      let visible  = 0;
+      cards.forEach(card => {
+        const catMatch   = activeCategory === 'all' || card.dataset.category === activeCategory;
+        const titleMatch = !activeSearch || card.dataset.title.includes(activeSearch);
+        const show       = catMatch && titleMatch;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      document.getElementById('countNum').textContent = visible;
+      document.getElementById('emptyState').classList.toggle('hidden', visible > 0);
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.contains('is-open') ? closeMobileMenu() : openMobileMenu();
+    }
+    function openMobileMenu() {
+      const m = document.getElementById('mobileMenu'), d = document.getElementById('mobileDrawer'), b = document.getElementById('mobileBackdrop');
+      m.classList.add('is-open'); m.classList.remove('pointer-events-none'); m.setAttribute('aria-hidden','false');
+      d.classList.replace('translate-x-full','translate-x-0'); b.classList.replace('opacity-0','opacity-100');
+      document.getElementById('hamburgerBtn').setAttribute('aria-expanded','true');
+      document.getElementById('ham1').style.cssText='transform:translateY(6.5px) rotate(45deg)';
+      document.getElementById('ham2').style.opacity='0';
+      document.getElementById('ham3').style.cssText='transform:translateY(-6.5px) rotate(-45deg)';
+      document.body.style.overflow='hidden';
+    }
+    function closeMobileMenu() {
+      const m = document.getElementById('mobileMenu'), d = document.getElementById('mobileDrawer'), b = document.getElementById('mobileBackdrop');
+      d.classList.replace('translate-x-0','translate-x-full'); b.classList.replace('opacity-100','opacity-0');
+      document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false');
+      ['ham1','ham2','ham3'].forEach(id => document.getElementById(id).style.cssText='');
+      document.body.style.overflow='';
+      setTimeout(() => { m.classList.remove('is-open'); m.classList.add('pointer-events-none'); m.setAttribute('aria-hidden','true'); }, 280);
+    }
+    function switchLang(lang) {
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        const active = btn.dataset.lang === lang;
+        btn.setAttribute('aria-pressed', String(active));
+        if (active) { btn.classList.add('border-gold-700','bg-gold-700/10','text-gold-400'); btn.classList.remove('border-transparent','text-stone-400'); }
+        else { btn.classList.remove('border-gold-700','bg-gold-700/10','text-gold-400'); btn.classList.add('border-transparent','text-stone-400'); }
+      });
+      const html = document.documentElement;
+      if (lang === 'dr' || lang === 'ps') { html.setAttribute('dir','rtl'); html.setAttribute('lang', lang === 'dr' ? 'fa' : 'ps'); }
+      else { html.setAttribute('dir','ltr'); html.setAttribute('lang','en'); }
+    }
+    document.addEventListener('click', e => { if (!e.target.closest('.dropdown-parent')) document.querySelectorAll('.dropdown-parent').forEach(d => d.classList.remove('is-open')); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileMenu(); });
+  </script>
+
+</body>
+</html>

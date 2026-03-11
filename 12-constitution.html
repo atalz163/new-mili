@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Constitution — Mili Mehwar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config={theme:{extend:{colors:{green:{900:'#0D3B22',700:'#1B5E3B',500:'#2D7A52',100:'#E8F5ED'},red:{700:'#C62828',500:'#D84040'},gold:{700:'#B8860B',400:'#D4A017',100:'#FDF5DC'},charcoal:{DEFAULT:'#1E1E1E',light:'#2C2C2C'},stone:{800:'#302B24',700:'#3D3630',600:'#5C5448',400:'#968E7E',200:'#CEC7B8',100:'#E8E2D9'},cream:'#EDE8DF',offwhite:'#F8F5F0',ink:'#1A1410'},fontFamily:{display:['"Playfair Display"','Georgia','serif'],body:['"Source Serif 4"','Georgia','serif'],arabic:['"Noto Naskh Arabic"','serif']},boxShadow:{gold:'0 4px 24px rgba(184,134,11,0.28)'}}}}
+  </script>
+  <style>
+    body{font-family:'Source Serif 4',Georgia,serif;}
+    [dir="rtl"]{font-family:'Noto Naskh Arabic',serif;}
+    .dropdown-menu{opacity:0;transform:translateY(-4px);pointer-events:none;transition:opacity 150ms ease 100ms,transform 150ms ease 100ms;}
+    .dropdown-parent:hover .dropdown-menu{opacity:1;transform:translateY(0);pointer-events:auto;transition:opacity 150ms ease 0ms,transform 150ms ease 0ms;}
+    .dropdown-menu::before{content:'';position:absolute;top:-12px;left:0;right:0;height:12px;}
+    .article-card{transition:transform 220ms ease,box-shadow 220ms ease;}
+    .article-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(26,20,16,0.1);}
+    .footer-link::before{content:'';display:inline-block;width:12px;height:1px;background:#B8860B;margin-right:8px;vertical-align:middle;flex-shrink:0;transition:width 200ms ease;}
+    .footer-link:hover::before{width:20px;}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity 500ms ease,transform 500ms cubic-bezier(0.16,1,0.3,1);}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .reveal-delay-1{transition-delay:80ms;}
+    .reveal-delay-2{transition-delay:160ms;}
+    .reveal-delay-3{transition-delay:240ms;}
+    #mobileDrawer{transition:transform 280ms cubic-bezier(0.16,1,0.3,1);}
+    #mobileBackdrop{transition:opacity 280ms ease;}
+    #scrollProgress{transition:width 80ms linear;}
+  </style>
+</head>
+<body class="bg-offwhite text-ink antialiased">
+<div id="scrollProgress" class="fixed top-0 left-0 h-[3px] w-0 bg-gradient-to-r from-gold-700 to-gold-400 z-[999] pointer-events-none"></div>
+
+<!-- TOPBAR -->
+<div class="bg-ink h-9 flex items-center"><div class="max-w-[1280px] mx-auto px-6 w-full flex items-center justify-between"><a href="mailto:info@milimehwar.org" class="flex items-center gap-1.5 text-stone-400 text-xs tracking-wide hover:text-white transition-colors duration-150"><svg class="w-3 h-3 opacity-70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@milimehwar.org</a><div class="flex items-center gap-4"><a href="https://twitter.com/milimehwar" target="_blank" rel="noopener" aria-label="X" class="text-stone-400 hover:text-white transition-colors duration-150"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.258 5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="https://facebook.com/milimehwar" target="_blank" rel="noopener" aria-label="Facebook" class="text-stone-400 hover:text-white transition-colors duration-150"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="https://youtube.com/@milimehwar" target="_blank" rel="noopener" aria-label="YouTube" class="text-stone-400 hover:text-white transition-colors duration-150"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a></div></div></div>
+
+<!-- NAV (same structure — About Us active) -->
+<header>
+  <nav id="mainNav" class="bg-charcoal border-b-2 border-gold-700 sticky top-0 z-[200] h-[68px] flex items-center transition-shadow duration-300">
+    <div class="max-w-[1280px] mx-auto px-6 w-full flex items-center justify-between gap-8">
+      <a href="/en" class="flex items-center gap-3 shrink-0"><div class="w-[42px] h-[42px] rounded-full bg-white/10 border-2 border-gold-400 flex items-center justify-center shadow-gold shrink-0"><img src="/images/logo.svg" class="w-7 h-7 object-contain" alt="" style="filter:brightness(0) invert(1);" /></div><div><div class="font-display font-bold text-xl text-white leading-none tracking-tight">Mili<span class="text-gold-400">Mehwar</span></div><span class="text-[9px] tracking-[0.18em] uppercase text-stone-400 block mt-0.5">Afghan National Movement</span></div></a>
+      <ul class="hidden lg:flex items-center gap-1 flex-1 justify-center">
+        <li><a href="/en" class="px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] block">Home</a></li>
+        <li><a href="/en/announcements" class="px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] block">Announcements</a></li>
+        <li><a href="/en/reports" class="px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] block">Reports</a></li>
+        <li><a href="/en/articles" class="px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] block">Articles</a></li>
+        <li class="dropdown-parent relative"><button class="flex items-center gap-1 px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07]">Gallery <svg class="w-3 h-3 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><ul class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 min-w-[200px] bg-charcoal-light border border-white/[0.08] border-t-2 border-t-gold-700 rounded-b-xl shadow-2xl pt-3 pb-2 z-50"><li><a href="/en/gallery/photos" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photo Gallery</a></li><li><a href="/en/gallery/videos" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Video Gallery</a></li></ul></li>
+        <li class="dropdown-parent relative"><button class="flex items-center gap-1 px-3 py-2 text-gold-400 text-sm font-medium rounded hover:bg-white/[0.07]">About Us <svg class="w-3 h-3 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><ul class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 min-w-[220px] bg-charcoal-light border border-white/[0.08] border-t-2 border-t-gold-700 rounded-b-xl shadow-2xl pt-3 pb-2 z-50"><li><a href="/en/about/mission" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Our Mission</a></li><li><a href="/en/about/pioneers" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Pioneers</a></li><li><hr class="border-white/[0.06] my-1 mx-4"/></li><li><a href="/en/about/constitution" class="flex items-center gap-3 px-5 py-3 text-gold-400 bg-white/[0.04] text-sm"><svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Constitution</a></li><li><a href="/en/about/why-mili-mehwar" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Why Mili Mehwar?</a></li></ul></li>
+        <li class="dropdown-parent relative"><button class="flex items-center gap-1 px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07]">Contact <svg class="w-3 h-3 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><ul class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 min-w-[200px] bg-charcoal-light border border-white/[0.08] border-t-2 border-t-gold-700 rounded-b-xl shadow-2xl pt-3 pb-2 z-50"><li><a href="/en/contact" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Contact Us</a></li><li><a href="/en/join" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>Join the Movement</a></li></ul></li>
+      </ul>
+      <div class="flex items-center gap-3 shrink-0"><div class="hidden lg:flex items-center gap-1"><button data-lang="en" onclick="switchLang('en')" class="lang-btn px-3 py-[3px] text-xs font-bold tracking-widest uppercase rounded-full border border-gold-700 bg-gold-700/10 text-gold-400" aria-pressed="true">EN</button><button data-lang="ps" onclick="switchLang('ps')" class="lang-btn px-3 py-[3px] text-sm rounded-full border border-transparent text-stone-400 hover:text-white hover:border-white/20 font-arabic" aria-pressed="false">پښتو</button><button data-lang="dr" onclick="switchLang('dr')" class="lang-btn px-3 py-[3px] text-sm rounded-full border border-transparent text-stone-400 hover:text-white hover:border-white/20 font-arabic" aria-pressed="false">دری</button></div><a href="/en/join" class="hidden lg:inline-flex items-center gap-1.5 px-5 py-2 bg-green-700 hover:bg-green-500 text-white text-xs font-bold tracking-widest uppercase rounded transition-colors duration-150"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Join Us</a><button id="hamburgerBtn" onclick="toggleMobileMenu()" class="lg:hidden flex flex-col justify-center gap-[5px] w-9 h-9 p-2 rounded hover:bg-white/[0.08]" aria-label="Open menu" aria-expanded="false"><span id="ham1" class="block h-[1.5px] bg-stone-200 rounded-full transition-all duration-300 origin-center"></span><span id="ham2" class="block h-[1.5px] bg-stone-200 rounded-full transition-all duration-300"></span><span id="ham3" class="block h-[1.5px] bg-stone-200 rounded-full transition-all duration-300 origin-center"></span></button></div>
+    </div>
+  </nav>
+</header>
+
+<div id="mobileMenu" class="fixed inset-0 z-[190] pointer-events-none" aria-hidden="true"><div id="mobileBackdrop" onclick="closeMobileMenu()" class="absolute inset-0 bg-black/60 opacity-0"></div><div id="mobileDrawer" class="absolute top-0 right-0 bottom-0 w-[min(320px,88vw)] bg-charcoal border-l border-white/[0.08] translate-x-full flex flex-col overflow-y-auto" role="dialog" aria-modal="true"><div class="flex items-center justify-between px-6 py-5 border-b border-white/[0.08]"><span class="font-display font-bold text-lg text-white">Mili<span class="text-gold-400">Mehwar</span></span><button onclick="closeMobileMenu()" class="w-8 h-8 flex items-center justify-center text-stone-400 hover:text-white rounded"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><nav class="flex-1 py-2"><a href="/en" class="flex px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04]">Home</a><a href="/en/announcements" class="flex px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04]">Announcements</a><a href="/en/about/mission" class="flex px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04]">Our Mission</a><a href="/en/about/pioneers" class="flex px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04]">Pioneers</a><a href="/en/about/constitution" class="flex px-6 py-4 text-gold-400 font-medium border-b border-white/[0.05]">Constitution</a><a href="/en/about/why-mili-mehwar" class="flex px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04]">Why Mili Mehwar?</a><a href="/en/contact" class="flex px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04]">Contact</a><div class="px-6 pt-6"><a href="/en/join" class="flex items-center justify-center py-3.5 bg-green-700 text-white text-sm font-bold tracking-widest uppercase rounded">Join the Movement</a></div></nav><div class="flex gap-3 px-6 py-5 border-t border-white/[0.08]"><button onclick="switchLang('en')" class="flex-1 py-3 text-center text-xs font-bold tracking-widest uppercase rounded border border-gold-700 bg-gold-700/15 text-gold-400">EN</button><button onclick="switchLang('ps')" class="flex-1 py-3 text-center text-sm rounded border border-white/10 bg-white/[0.05] text-stone-400 font-arabic">پښتو</button><button onclick="switchLang('dr')" class="flex-1 py-3 text-center text-sm rounded border border-white/10 bg-white/[0.05] text-stone-400 font-arabic">دری</button></div></div></div>
+
+<main>
+
+  <!-- PAGE HEADER -->
+  <div class="bg-charcoal pt-14 pb-12">
+    <div class="max-w-[1280px] mx-auto px-6">
+      <nav class="flex items-center gap-2 text-xs text-stone-400 mb-6"><a href="/en" class="hover:text-stone-200 transition-colors duration-150">Home</a><svg class="w-3 h-3 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg><a href="/en/about/mission" class="hover:text-stone-200 transition-colors duration-150">About</a><svg class="w-3 h-3 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg><span class="text-stone-200">Constitution</span></nav>
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-[1px] bg-gold-400"></div><span class="text-gold-400 text-xs font-bold tracking-[0.2em] uppercase">About Us</span></div>
+      <h1 class="font-display font-black text-white leading-tight mb-3" style="font-size:clamp(2rem,4vw,3.2rem);">Constitution</h1>
+      <p class="text-stone-400 max-w-xl text-sm leading-relaxed">A summary of the founding charter and governing principles of Mili Mehwar — the Afghan National Movement.</p>
+      <div class="flex flex-wrap items-center gap-2 mt-8">
+        <a href="/en/about/mission" class="px-4 py-2 bg-white/[0.08] hover:bg-white/[0.14] text-stone-300 hover:text-white text-xs font-bold tracking-widest uppercase rounded-lg transition-colors duration-150">Our Mission</a>
+        <a href="/en/about/pioneers" class="px-4 py-2 bg-white/[0.08] hover:bg-white/[0.14] text-stone-300 hover:text-white text-xs font-bold tracking-widest uppercase rounded-lg transition-colors duration-150">Pioneers</a>
+        <a href="12-constitution.html" class="px-4 py-2 bg-gold-700 text-white text-xs font-bold tracking-widest uppercase rounded-lg">Constitution</a>
+        <a href="/en/about/why-mili-mehwar" class="px-4 py-2 bg-white/[0.08] hover:bg-white/[0.14] text-stone-300 hover:text-white text-xs font-bold tracking-widest uppercase rounded-lg transition-colors duration-150">Why Mili Mehwar?</a>
+      </div>
+    </div>
+  </div>
+  <div class="flex h-[4px]" aria-hidden="true"><div class="flex-1" style="background:#111;"></div><div class="flex-1 bg-red-700"></div><div class="flex-1 bg-green-700"></div></div>
+
+  <section class="py-14 bg-offwhite">
+    <div class="max-w-[1280px] mx-auto px-6">
+
+      <!-- Download banner -->
+      <div class="reveal bg-charcoal rounded-2xl p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-14">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-gold-700/20 border border-gold-700/30 flex items-center justify-center shrink-0">
+            <svg class="w-6 h-6 text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div>
+            <p class="text-white font-display font-bold text-lg leading-tight mb-1">Full Constitution Document</p>
+            <p class="text-stone-400 text-sm">Available in Dari, Pashto, and English — last updated 2023.</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-3 shrink-0">
+          <a href="/documents/constitution-en.pdf" download class="inline-flex items-center gap-2 px-6 py-3 bg-gold-700 hover:bg-gold-400 text-white text-xs font-bold tracking-widest uppercase rounded-xl transition-colors duration-150">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            English PDF
+          </a>
+          <a href="/documents/constitution-dr.pdf" download class="inline-flex items-center gap-2 px-6 py-3 bg-white/[0.08] hover:bg-white/[0.15] text-stone-200 text-xs font-bold tracking-widest uppercase rounded-xl transition-colors duration-150 font-arabic">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            دری
+          </a>
+          <a href="/documents/constitution-ps.pdf" download class="inline-flex items-center gap-2 px-6 py-3 bg-white/[0.08] hover:bg-white/[0.15] text-stone-200 text-xs font-bold tracking-widest uppercase rounded-xl transition-colors duration-150 font-arabic">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            پښتو
+          </a>
+        </div>
+      </div>
+
+      <!-- Intro text -->
+      <div class="reveal max-w-2xl mb-14">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-[1px] bg-gold-400"></div>
+          <span class="text-gold-700 text-xs font-bold tracking-[0.2em] uppercase">About This Document</span>
+        </div>
+        <p class="text-stone-600 text-base leading-relaxed">The Constitution of Mili Mehwar is the foundational legal and philosophical document of the movement. It establishes the organisation's purpose, membership structure, governance bodies, decision-making processes, and the principles that bind all members. The following is a structured summary of its key provisions. To read the full document, please download the PDF above.</p>
+      </div>
+
+      <!-- Constitution chapters grid -->
+      <div class="flex flex-col gap-5">
+
+        <!-- Chapter 1 -->
+        <div class="reveal article-card bg-white rounded-2xl shadow-sm overflow-hidden">
+          <div class="flex items-stretch">
+            <div class="w-1.5 bg-green-700 shrink-0"></div>
+            <div class="flex-1 p-7">
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-xl bg-green-100 flex items-center justify-center shrink-0">
+                    <span class="font-display font-black text-green-700 text-sm">I</span>
+                  </div>
+                  <div>
+                    <p class="text-[10px] font-bold tracking-widest uppercase text-stone-400">Chapter One</p>
+                    <h2 class="font-display font-bold text-ink text-lg leading-tight">Name, Identity &amp; Legal Status</h2>
+                  </div>
+                </div>
+                <button onclick="toggleChapter(this)" class="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center shrink-0 transition-colors duration-150" aria-label="Expand chapter">
+                  <svg class="w-4 h-4 text-stone-500 chapter-icon transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="chapter-body">
+                <ul class="flex flex-col gap-3">
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed">
+                    <div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>
+                    The organisation is formally named <span class="font-semibold text-ink mx-1">Mili Mehwar — the Afghan National Movement</span> (ملی محور — جنبش ملی افغانستان).
+                  </li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed">
+                    <div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>
+                    Mili Mehwar is a non-partisan, non-profit civil society organisation with no affiliation to any government, political party, or armed faction.
+                  </li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed">
+                    <div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>
+                    The organisation operates internationally, with branches or representative members in any country where a minimum of twenty registered members reside.
+                  </li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed">
+                    <div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>
+                    The official languages of the organisation are Dari, Pashto, and English. All official documents are published in all three languages.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 2 -->
+        <div class="reveal article-card bg-white rounded-2xl shadow-sm overflow-hidden">
+          <div class="flex items-stretch">
+            <div class="w-1.5 bg-gold-700 shrink-0"></div>
+            <div class="flex-1 p-7">
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-xl bg-gold-100 flex items-center justify-center shrink-0">
+                    <span class="font-display font-black text-gold-700 text-sm">II</span>
+                  </div>
+                  <div>
+                    <p class="text-[10px] font-bold tracking-widest uppercase text-stone-400">Chapter Two</p>
+                    <h2 class="font-display font-bold text-ink text-lg leading-tight">Objectives &amp; Principles</h2>
+                  </div>
+                </div>
+                <button onclick="toggleChapter(this)" class="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center shrink-0 transition-colors duration-150" aria-label="Expand chapter">
+                  <svg class="w-4 h-4 text-stone-500 chapter-icon transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="chapter-body">
+                <ul class="flex flex-col gap-3">
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>To advance a peaceful, Afghan-led political solution to the ongoing crisis in Afghanistan, grounded in democracy, human rights, and the rule of law.</li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>To facilitate structured national dialogue among Afghans of all backgrounds, with the aim of developing shared political positions and recommendations.</li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>To advocate internationally for Afghan rights, sovereignty, and inclusion — particularly for women, minorities, and civil society — in any political process.</li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>To educate and empower Afghan communities through civic education, book clubs, research publications, and cultural programmes.</li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>The organisation commits to the principles of non-violence, inclusion, transparency, accountability, and respect for all cultures and ethnicities within Afghanistan.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 3 -->
+        <div class="reveal article-card bg-white rounded-2xl shadow-sm overflow-hidden">
+          <div class="flex items-stretch">
+            <div class="w-1.5 bg-charcoal shrink-0"></div>
+            <div class="flex-1 p-7">
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-xl bg-stone-100 flex items-center justify-center shrink-0">
+                    <span class="font-display font-black text-stone-600 text-sm">III</span>
+                  </div>
+                  <div>
+                    <p class="text-[10px] font-bold tracking-widest uppercase text-stone-400">Chapter Three</p>
+                    <h2 class="font-display font-bold text-ink text-lg leading-tight">Membership</h2>
+                  </div>
+                </div>
+                <button onclick="toggleChapter(this)" class="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center shrink-0 transition-colors duration-150">
+                  <svg class="w-4 h-4 text-stone-500 chapter-icon transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="chapter-body">
+                <ul class="flex flex-col gap-3">
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>Membership is open to all Afghans aged 18 and above, regardless of ethnicity, religion, gender, or place of residence.</li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>Membership is free of charge. No financial contribution is required to join, vote, or hold a position within the organisation.</li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>Members are required to uphold the Constitution, act in accordance with the organisation's principles, and refrain from actions that bring the organisation into disrepute.</li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>Membership may be revoked by a two-thirds majority of the Executive Council in cases of serious misconduct, violation of the Constitution, or affiliation with armed groups.</li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>Honorary membership may be granted to non-Afghans who have made exceptional contributions to the cause of Afghan rights and sovereignty.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 4 -->
+        <div class="reveal article-card bg-white rounded-2xl shadow-sm overflow-hidden">
+          <div class="flex items-stretch">
+            <div class="w-1.5 bg-green-500 shrink-0"></div>
+            <div class="flex-1 p-7">
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-xl bg-green-100 flex items-center justify-center shrink-0">
+                    <span class="font-display font-black text-green-700 text-sm">IV</span>
+                  </div>
+                  <div>
+                    <p class="text-[10px] font-bold tracking-widest uppercase text-stone-400">Chapter Four</p>
+                    <h2 class="font-display font-bold text-ink text-lg leading-tight">Governance Structure</h2>
+                  </div>
+                </div>
+                <button onclick="toggleChapter(this)" class="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center shrink-0 transition-colors duration-150">
+                  <svg class="w-4 h-4 text-stone-500 chapter-icon transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="chapter-body">
+                <ul class="flex flex-col gap-3">
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div><div><span class="font-semibold text-ink">General Assembly (Loya Jirga):</span> The supreme decision-making body, composed of all registered members. Convenes at minimum once every two years, and has authority to elect or remove leadership, amend the Constitution, and set strategic direction.</div></li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div><div><span class="font-semibold text-ink">Executive Council:</span> A body of 11 elected members responsible for implementing the General Assembly's decisions, managing day-to-day operations, and representing the organisation externally.</div></li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div><div><span class="font-semibold text-ink">Chairman:</span> Elected by the General Assembly to a two-year term, renewable once. Chairs the Executive Council and represents the movement publicly.</div></li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div><div><span class="font-semibold text-ink">Oversight Committee:</span> An independent body of three members elected by the General Assembly, responsible for auditing finances and ensuring Constitutional compliance.</div></li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div><div><span class="font-semibold text-ink">Working Groups:</span> Specialised committees on Women's Rights, Education, Economics, International Affairs, and Media, each led by an elected coordinator.</div></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 5 -->
+        <div class="reveal article-card bg-white rounded-2xl shadow-sm overflow-hidden">
+          <div class="flex items-stretch">
+            <div class="w-1.5 bg-red-700 shrink-0"></div>
+            <div class="flex-1 p-7">
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-xl bg-red-700/10 flex items-center justify-center shrink-0">
+                    <span class="font-display font-black text-red-700 text-sm">V</span>
+                  </div>
+                  <div>
+                    <p class="text-[10px] font-bold tracking-widest uppercase text-stone-400">Chapter Five</p>
+                    <h2 class="font-display font-bold text-ink text-lg leading-tight">Finances &amp; Resources</h2>
+                  </div>
+                </div>
+                <button onclick="toggleChapter(this)" class="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center shrink-0 transition-colors duration-150">
+                  <svg class="w-4 h-4 text-stone-500 chapter-icon transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="chapter-body">
+                <ul class="flex flex-col gap-3">
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>The organisation is funded through voluntary member donations, grants from civil society foundations, and proceeds from events. No funding is accepted from any government or political party.</li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>All financial accounts are audited annually by the Oversight Committee and a summary financial report is published and made available to all members.</li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>No member of the Executive Council may receive personal financial benefit from the organisation's funds beyond the reimbursement of documented expenses.</li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>In the event of dissolution, all remaining assets shall be transferred to a registered charitable organisation with compatible objectives, as decided by the General Assembly.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 6 -->
+        <div class="reveal article-card bg-white rounded-2xl shadow-sm overflow-hidden">
+          <div class="flex items-stretch">
+            <div class="w-1.5 bg-gold-400 shrink-0"></div>
+            <div class="flex-1 p-7">
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-xl bg-gold-100 flex items-center justify-center shrink-0">
+                    <span class="font-display font-black text-gold-700 text-sm">VI</span>
+                  </div>
+                  <div>
+                    <p class="text-[10px] font-bold tracking-widest uppercase text-stone-400">Chapter Six</p>
+                    <h2 class="font-display font-bold text-ink text-lg leading-tight">Amendments &amp; Dissolution</h2>
+                  </div>
+                </div>
+                <button onclick="toggleChapter(this)" class="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center shrink-0 transition-colors duration-150">
+                  <svg class="w-4 h-4 text-stone-500 chapter-icon transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="chapter-body">
+                <ul class="flex flex-col gap-3">
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>Amendments to this Constitution require a two-thirds majority vote at a duly convened General Assembly, with at least 30 days' written notice to all members.</li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>Chapters relating to the organisation's core objectives and non-partisan status may not be amended under any circumstances.</li>
+                  <li class="flex items-start gap-3 text-sm text-stone-600 leading-relaxed"><div class="w-1.5 h-1.5 rounded-full bg-gold-700 mt-2 shrink-0"></div>Dissolution of the organisation requires a three-quarters majority at a specially convened General Assembly, attended by no fewer than one hundred registered members.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Version note -->
+      <div class="reveal mt-10 flex items-center gap-3 p-5 bg-stone-100 rounded-xl">
+        <svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <p class="text-stone-500 text-xs leading-relaxed">This is a summary of the Mili Mehwar Constitution for public reference. The full legally binding text is available in the PDF download above. Current version: 2.1 — ratified at the General Assembly, October 2023.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flex h-[5px]" aria-hidden="true"><div class="flex-1" style="background:#111;"></div><div class="flex-1 bg-red-700"></div><div class="flex-1 bg-green-700"></div></div>
+  <div class="bg-charcoal text-stone-200"><div class="max-w-[1280px] mx-auto px-6 pt-16 pb-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12"><div class="sm:col-span-2 lg:col-span-1"><div class="flex items-center gap-3 mb-5"><div class="w-10 h-10 rounded-full bg-white/10 border-2 border-gold-400 flex items-center justify-center shrink-0">🏛️</div><div class="font-display font-bold text-lg text-white leading-none">Mili<span class="text-gold-400">Mehwar</span></div></div><p class="text-sm text-stone-400 leading-relaxed mb-6 max-w-xs">An Afghan national movement for unity, sovereignty, and democratic renewal.</p><div class="bg-green-700/15 border border-green-700/35 rounded-xl p-5"><div class="font-display font-bold text-white text-base mb-1">Want to join us?</div><p class="text-xs text-stone-400 mb-4 leading-relaxed">Membership is free and open to all Afghans.</p><a href="/en/join" class="inline-flex items-center gap-2 px-5 py-2.5 bg-green-700 hover:bg-green-500 text-white text-xs font-bold tracking-widest uppercase rounded transition-colors duration-150">Join Online</a></div></div><nav><h4 class="font-display font-bold text-white text-base mb-5 pb-3 border-b border-white/[0.08]">Quick Links</h4><ul class="flex flex-col gap-3"><li><a href="/en/announcements" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Announcements</a></li><li><a href="/en/reports" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Reports</a></li><li><a href="/en/articles" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Articles</a></li><li><a href="/en/gallery/photos" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Photo Gallery</a></li></ul></nav><nav><h4 class="font-display font-bold text-white text-base mb-5 pb-3 border-b border-white/[0.08]">About</h4><ul class="flex flex-col gap-3"><li><a href="/en/about/mission" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Our Mission</a></li><li><a href="/en/about/pioneers" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Pioneers</a></li><li><a href="/en/about/constitution" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Constitution</a></li><li><a href="/en/about/why-mili-mehwar" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Why Mili Mehwar?</a></li></ul></nav><nav><h4 class="font-display font-bold text-white text-base mb-5 pb-3 border-b border-white/[0.08]">Get Involved</h4><ul class="flex flex-col gap-3"><li><a href="/en/join" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Join the Movement</a></li><li><a href="/en/contact" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Contact Us</a></li><li><a href="mailto:info@milimehwar.org" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">info@milimehwar.org</a></li></ul></nav></div><div class="max-w-[1280px] mx-auto px-6 py-5 border-t border-white/[0.07] flex flex-wrap items-center justify-between gap-4"><p class="text-xs text-stone-600">Copyright &copy; <span id="footerYear"></span> MiliMehwar — All rights reserved.</p><nav class="flex gap-6"><a href="/en/privacy" class="text-xs text-stone-600 hover:text-stone-200 transition-colors duration-150">Privacy Policy</a><a href="/en/terms" class="text-xs text-stone-600 hover:text-stone-200 transition-colors duration-150">Terms of Use</a></nav></div></div>
+</footer>
+
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-8 right-8 w-11 h-11 bg-green-700 hover:bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg opacity-0 pointer-events-none -translate-y-3 transition-all duration-300 z-50" aria-label="Back to top"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+<script>
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+  window.addEventListener('scroll',()=>{const sy=window.scrollY,docH=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('scrollProgress').style.width=(docH>0?(sy/docH)*100:0)+'%';document.getElementById('mainNav').classList.toggle('shadow-[0_4px_32px_rgba(0,0,0,0.45)]',sy>10);const btt=document.getElementById('backToTop');btt.classList.toggle('opacity-0',sy<=400);btt.classList.toggle('pointer-events-none',sy<=400);btt.classList.toggle('-translate-y-3',sy<=400);btt.classList.toggle('opacity-100',sy>400);btt.classList.toggle('pointer-events-auto',sy>400);btt.classList.toggle('translate-y-0',sy>400);},{passive:true});
+  const ro=new IntersectionObserver(entries=>{entries.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');ro.unobserve(el.target);}});},{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+  function toggleChapter(btn){const body=btn.closest('.flex-1').querySelector('.chapter-body');const icon=btn.querySelector('.chapter-icon');const isOpen=!body.classList.contains('hidden');document.querySelectorAll('.chapter-body').forEach(b=>b.classList.add('hidden'));document.querySelectorAll('.chapter-icon').forEach(i=>i.style.transform='');if(!isOpen){body.classList.remove('hidden');icon.style.transform='rotate(180deg)';}else{body.classList.add('hidden');}}
+  // Open first chapter by default
+  document.querySelectorAll('.chapter-body').forEach((b,i)=>{if(i>0)b.classList.add('hidden');});
+  function toggleMobileMenu(){document.getElementById('mobileMenu').classList.contains('is-open')?closeMobileMenu():openMobileMenu();}
+  function openMobileMenu(){const m=document.getElementById('mobileMenu'),d=document.getElementById('mobileDrawer'),b=document.getElementById('mobileBackdrop');m.classList.add('is-open');m.classList.remove('pointer-events-none');m.setAttribute('aria-hidden','false');d.classList.replace('translate-x-full','translate-x-0');b.classList.replace('opacity-0','opacity-100');document.getElementById('hamburgerBtn').setAttribute('aria-expanded','true');document.getElementById('ham1').style.cssText='transform:translateY(6.5px) rotate(45deg)';document.getElementById('ham2').style.opacity='0';document.getElementById('ham3').style.cssText='transform:translateY(-6.5px) rotate(-45deg)';document.body.style.overflow='hidden';}
+  function closeMobileMenu(){const m=document.getElementById('mobileMenu'),d=document.getElementById('mobileDrawer'),b=document.getElementById('mobileBackdrop');d.classList.replace('translate-x-0','translate-x-full');b.classList.replace('opacity-100','opacity-0');document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false');['ham1','ham2','ham3'].forEach(id=>document.getElementById(id).style.cssText='');document.body.style.overflow='';setTimeout(()=>{m.classList.remove('is-open');m.classList.add('pointer-events-none');m.setAttribute('aria-hidden','true');},280);}
+  function switchLang(lang){document.querySelectorAll('.lang-btn').forEach(btn=>{const active=btn.dataset.lang===lang;btn.setAttribute('aria-pressed',String(active));if(active){btn.classList.add('border-gold-700','bg-gold-700/10','text-gold-400');btn.classList.remove('border-transparent','text-stone-400');}else{btn.classList.remove('border-gold-700','bg-gold-700/10','text-gold-400');btn.classList.add('border-transparent','text-stone-400');}});const html=document.documentElement;if(lang==='dr'||lang==='ps'){html.setAttribute('dir','rtl');html.setAttribute('lang',lang==='dr'?'fa':'ps');}else{html.setAttribute('dir','ltr');html.setAttribute('lang','en');}}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobileMenu();});
+  document.addEventListener('click',e=>{if(!e.target.closest('.dropdown-parent'))document.querySelectorAll('.dropdown-parent').forEach(d=>d.classList.remove('is-open'));});
+</script>
+</body>
+</html>

@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mili Mehwar — Home</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            green:    { 900: '#0D3B22', 700: '#1B5E3B', 500: '#2D7A52', 100: '#E8F5ED' },
+            red:      { 700: '#C62828', 500: '#D84040' },
+            gold:     { 700: '#B8860B', 400: '#D4A017', 100: '#FDF5DC' },
+            charcoal: { DEFAULT: '#1E1E1E', light: '#2C2C2C' },
+            stone:    { 800: '#302B24', 700: '#3D3630', 600: '#5C5448', 400: '#968E7E', 200: '#CEC7B8', 100: '#E8E2D9' },
+            cream:    '#EDE8DF',
+            offwhite: '#F8F5F0',
+            ink:      '#1A1410',
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            body:    ['"Source Serif 4"', 'Georgia', 'serif'],
+            arabic:  ['"Noto Naskh Arabic"', 'serif'],
+          },
+          boxShadow: {
+            gold: '0 4px 24px rgba(184,134,11,0.28)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    body { font-family: 'Source Serif 4', Georgia, serif; }
+    [dir="rtl"] { font-family: 'Noto Naskh Arabic', serif; }
+
+    /* ── Hero ── */
+    .hero-bg {
+      background-color: #0a0a0a;
+      background-image:
+        linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.6) 60%, rgba(10,10,10,0.92) 100%),
+        url('https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=1600&q=80');
+      background-size: cover;
+      background-position: center top;
+    }
+
+    /* Afghan flag vertical stripe — right edge of hero */
+    .hero-stripe {
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 5px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Section eyebrow ornament */
+    .section-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+    }
+    .section-eyebrow::before,
+    .section-eyebrow::after {
+      content: '';
+      width: 32px; height: 1px;
+      background: linear-gradient(to right, transparent, #B8860B);
+    }
+    .section-eyebrow::after {
+      background: linear-gradient(to left, transparent, #B8860B);
+    }
+
+    /* Card hover lift */
+    .card-hover {
+      transition: transform 250ms cubic-bezier(0.16,1,0.3,1),
+                  box-shadow 250ms cubic-bezier(0.16,1,0.3,1);
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(26,20,16,0.14);
+    }
+
+    /* Card image zoom on hover */
+    .card-img-wrap { overflow: hidden; }
+    .card-img-wrap img {
+      transition: transform 600ms cubic-bezier(0.16,1,0.3,1);
+    }
+    .card-hover:hover .card-img-wrap img { transform: scale(1.04); }
+
+    /* Read more link underline grow */
+    .read-more {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .read-more::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0;
+      width: 0; height: 1px;
+      background: #1B5E3B;
+      transition: width 200ms ease;
+    }
+    .read-more:hover::after { width: 100%; }
+
+    /* Scroll reveal — elements start invisible, JS adds .visible */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 600ms ease, transform 600ms cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 100ms; }
+    .reveal-delay-2 { transition-delay: 200ms; }
+    .reveal-delay-3 { transition-delay: 300ms; }
+
+    /* Footer link dash */
+    .footer-link::before {
+      content: '';
+      display: inline-block;
+      width: 12px; height: 1px;
+      background: #B8860B;
+      margin-right: 8px;
+      vertical-align: middle;
+      flex-shrink: 0;
+      transition: width 200ms ease;
+    }
+    .footer-link:hover::before { width: 20px; }
+
+    /* Dropdown */
+    .dropdown-menu {
+      opacity: 0;
+      transform: translateY(-4px);
+      pointer-events: none;
+      transition: opacity 150ms ease 100ms, transform 150ms ease 100ms;
+    }
+    .dropdown-parent:hover .dropdown-menu {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      transition: opacity 150ms ease 0ms, transform 150ms ease 0ms;
+    }
+    .dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -12px; left: 0; right: 0;
+      height: 12px;
+    }
+    .nav-active::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 12px; right: 12px;
+      height: 2px;
+      background: #D4A017;
+      border-radius: 9999px;
+    }
+
+    /* Mobile drawer */
+    #mobileDrawer   { transition: transform 280ms cubic-bezier(0.16,1,0.3,1); }
+    #mobileBackdrop { transition: opacity 280ms ease; }
+    #scrollProgress { transition: width 80ms linear; }
+  </style>
+</head>
+
+<body class="bg-offwhite text-ink antialiased">
+
+  <!-- Scroll progress -->
+  <div id="scrollProgress" class="fixed top-0 left-0 h-[3px] w-0 bg-gradient-to-r from-gold-700 to-gold-400 z-[999] pointer-events-none" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       TOPBAR
+  ============================================================= -->
+  <div class="bg-ink h-9 flex items-center">
+    <div class="max-w-[1280px] mx-auto px-6 w-full flex items-center justify-between">
+      <div class="flex items-center gap-6">
+        <a href="mailto:info@milimehwar.org" class="flex items-center gap-1.5 text-stone-400 text-xs tracking-wide hover:text-white transition-colors duration-150">
+          <svg class="w-3 h-3 opacity-70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          info@milimehwar.org
+        </a>
+        <span class="hidden md:flex items-center gap-1.5 text-stone-400 text-xs">
+          <svg class="w-3 h-3 opacity-70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          milimehwar.org
+        </span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://twitter.com/milimehwar" target="_blank" rel="noopener" aria-label="X" class="text-stone-400 hover:text-white transition-colors duration-150">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.258 5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://facebook.com/milimehwar" target="_blank" rel="noopener" aria-label="Facebook" class="text-stone-400 hover:text-white transition-colors duration-150">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://youtube.com/@milimehwar" target="_blank" rel="noopener" aria-label="YouTube" class="text-stone-400 hover:text-white transition-colors duration-150">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       NAV — copied from 01-layout-shell, active link = Home
+  ============================================================= -->
+  <header>
+    <nav id="mainNav" class="bg-charcoal border-b-2 border-gold-700 sticky top-0 z-[200] h-[68px] flex items-center transition-shadow duration-300">
+      <div class="max-w-[1280px] mx-auto px-6 w-full flex items-center justify-between gap-8">
+        <a href="/en" class="flex items-center gap-3 shrink-0" aria-label="Mili Mehwar Home">
+          <div class="w-[42px] h-[42px] rounded-full bg-white/10 border-2 border-gold-400 flex items-center justify-center shadow-gold shrink-0">
+            <img src="milimehwar.png" class="w-7 h-7 object-contain" alt=""  />
+          </div>
+          <div>
+            <div class="font-display font-bold text-xl text-white leading-none tracking-tight">Mili<span class="text-gold-400">Mehwar</span></div>
+            <span class="text-[9px] tracking-[0.18em] uppercase text-stone-400 block mt-0.5">Afghan National Movement</span>
+          </div>
+        </a>
+
+        <ul class="hidden lg:flex items-center gap-1 flex-1 justify-center" role="list">
+          <li><a href="/en" class="nav-active relative px-3 py-2 text-gold-400 text-sm font-medium rounded">Home</a></li>
+          <li><a href="04-announcements-listing.html" class="px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] transition-all duration-150 block">Announcements</a></li>
+          <li><a href="/en/reports" class="px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] transition-all duration-150 block">Reports</a></li>
+          <li><a href="/en/articles" class="px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] transition-all duration-150 block">Articles</a></li>
+          <li class="dropdown-parent relative">
+            <button class="flex items-center gap-1 px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] transition-all duration-150" aria-haspopup="true" aria-expanded="false">
+              Gallery <svg class="w-3 h-3 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 min-w-[200px] bg-charcoal-light border border-white/[0.08] border-t-2 border-t-gold-700 rounded-b-xl shadow-2xl pt-3 pb-2 z-50" role="menu">
+              <li><a href="06-photos.html" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photo Gallery</a></li>
+              <li><a href="07-videos.html" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Video Gallery</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-parent relative">
+            <button class="flex items-center gap-1 px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] transition-all duration-150" aria-haspopup="true" aria-expanded="false">
+              About Us <svg class="w-3 h-3 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 min-w-[220px] bg-charcoal-light border border-white/[0.08] border-t-2 border-t-gold-700 rounded-b-xl shadow-2xl pt-3 pb-2 z-50" role="menu">
+              <li><a href="10-our-mission.html" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Our Mission</a></li>
+              <li><a href="11-pioneers.html" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Pioneers</a></li>
+              <li><hr class="border-white/[0.06] my-1 mx-4" /></li>
+              <li><a href="12-constitution.html" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Constitution</a></li>
+              <li><a href="13-why-mili-mehwar.html" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Why Mili Mehwar?</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-parent relative">
+            <button class="flex items-center gap-1 px-3 py-2 text-stone-200 text-sm font-medium rounded hover:text-white hover:bg-white/[0.07] transition-all duration-150" aria-haspopup="true" aria-expanded="false">
+              Contact <svg class="w-3 h-3 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 min-w-[200px] bg-charcoal-light border border-white/[0.08] border-t-2 border-t-gold-700 rounded-b-xl shadow-2xl pt-3 pb-2 z-50" role="menu">
+              <li><a href="08-contact-page.html" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Contact Us</a></li>
+              <li><a href="09-join-page.html" class="flex items-center gap-3 px-5 py-3 text-stone-200 text-sm hover:bg-white/[0.06] hover:text-white transition-colors" role="menuitem"><svg class="w-4 h-4 text-stone-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>Join the Movement</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="flex items-center gap-3 shrink-0">
+          <div class="hidden lg:flex items-center gap-1" role="group" aria-label="Language">
+            <button data-lang="en" onclick="switchLang('en')" class="lang-btn px-3 py-[3px] text-xs font-bold tracking-widest uppercase rounded-full border border-gold-700 bg-gold-700/10 text-gold-400 transition-all duration-150" aria-pressed="true">EN</button>
+            <button data-lang="ps" onclick="switchLang('ps')" class="lang-btn px-3 py-[3px] text-sm rounded-full border border-transparent text-stone-400 hover:text-white hover:border-white/20 transition-all duration-150 font-arabic" aria-pressed="false">پښتو</button>
+            <button data-lang="dr" onclick="switchLang('dr')" class="lang-btn px-3 py-[3px] text-sm rounded-full border border-transparent text-stone-400 hover:text-white hover:border-white/20 transition-all duration-150 font-arabic" aria-pressed="false">دری</button>
+          </div>
+         
+          <button id="hamburgerBtn" onclick="toggleMobileMenu()" class="lg:hidden flex flex-col justify-center gap-[5px] w-9 h-9 p-2 rounded hover:bg-white/[0.08] transition-colors duration-150" aria-label="Open menu" aria-expanded="false">
+            <span id="ham1" class="block h-[1.5px] bg-stone-200 rounded-full transition-all duration-300 origin-center"></span>
+            <span id="ham2" class="block h-[1.5px] bg-stone-200 rounded-full transition-all duration-300"></span>
+            <span id="ham3" class="block h-[1.5px] bg-stone-200 rounded-full transition-all duration-300 origin-center"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile menu (same as shell) -->
+  <div id="mobileMenu" class="fixed inset-0 z-[190] pointer-events-none" aria-hidden="true">
+    <div id="mobileBackdrop" onclick="closeMobileMenu()" class="absolute inset-0 bg-black/60 opacity-0" aria-hidden="true"></div>
+    <div id="mobileDrawer" class="absolute top-0 right-0 bottom-0 w-[min(320px,88vw)] bg-charcoal border-l border-white/[0.08] translate-x-full flex flex-col overflow-y-auto" role="dialog" aria-modal="true">
+      <div class="flex items-center justify-between px-6 py-5 border-b border-white/[0.08]">
+        <span class="font-display font-bold text-lg text-white">Mili<span class="text-gold-400">Mehwar</span></span>
+        <button onclick="closeMobileMenu()" class="w-8 h-8 flex items-center justify-center text-stone-400 hover:text-white rounded" aria-label="Close menu">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <nav class="flex-1 py-2">
+        <a href="/en" class="flex items-center justify-between px-6 py-4 text-gold-400 font-medium border-b border-white/[0.05]">Home</a>
+        <a href="/en/announcements" class="flex items-center justify-between px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04] transition-all duration-150">Announcements</a>
+        <a href="/en/reports" class="flex items-center justify-between px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04] transition-all duration-150">Reports</a>
+        <a href="/en/articles" class="flex items-center justify-between px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04] transition-all duration-150">Articles</a>
+        <a href="/en/gallery/photos" class="flex items-center justify-between px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04] transition-all duration-150">Photo Gallery</a>
+        <a href="/en/gallery/videos" class="flex items-center justify-between px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04] transition-all duration-150">Video Gallery</a>
+        <a href="/en/about/mission" class="flex items-center justify-between px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04] transition-all duration-150">Our Mission</a>
+        <a href="/en/about/pioneers" class="flex items-center justify-between px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04] transition-all duration-150">Pioneers</a>
+        <a href="/en/contact" class="flex items-center justify-between px-6 py-4 text-stone-200 font-medium border-b border-white/[0.05] hover:text-white hover:bg-white/[0.04] transition-all duration-150">Contact</a>
+        <div class="px-6 pt-6">
+          <a href="/en/join" class="flex items-center justify-center py-3.5 bg-green-700 hover:bg-green-500 text-white text-sm font-bold tracking-widest uppercase rounded transition-colors duration-150">Join the Movement</a>
+        </div>
+      </nav>
+      <div class="flex gap-3 px-6 py-5 border-t border-white/[0.08]">
+        <button onclick="switchLang('en')" class="flex-1 py-3 text-center text-xs font-bold tracking-widest uppercase rounded border border-gold-700 bg-gold-700/15 text-gold-400">EN</button>
+        <button onclick="switchLang('ps')" class="flex-1 py-3 text-center text-sm rounded border border-white/10 bg-white/[0.05] text-stone-400 font-arabic">پښتو</button>
+        <button onclick="switchLang('dr')" class="flex-1 py-3 text-center text-sm rounded border border-white/10 bg-white/[0.05] text-stone-400 font-arabic">دری</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ============================================================
+         HERO
+    ============================================================= -->
+    <section class="hero-bg relative min-h-[92vh] flex items-end">
+
+      <!-- Afghan flag stripe — right edge -->
+      <div class="hero-stripe" aria-hidden="true">
+        <div class="flex-1" style="background:#111;"></div>
+        <div class="flex-1" style="background:#C62828;"></div>
+        <div class="flex-1" style="background:#1B5E3B;"></div>
+      </div>
+
+      <div class="relative z-10 w-full max-w-[1280px] mx-auto px-6 pb-20 pt-32">
+
+        <!-- Eyebrow -->
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-[1px] bg-gold-400" aria-hidden="true"></div>
+          <span class="text-gold-400 text-xs font-semibold tracking-[0.22em] uppercase">Afghan National Movement</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="font-display font-black text-white leading-[1.05] mb-6" style="font-size:clamp(2.6rem,6vw,5.2rem); max-width:720px;">
+          The Call for a<br>
+          <em class="text-gold-400 not-italic">Renewed Afghanistan</em>
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="text-white/70 text-lg leading-relaxed mb-10 max-w-xl">
+          Mili Mehwar stands for national unity, sovereignty, and a democratic future built by Afghans, for Afghans.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap gap-4">
+          <a href="/en/about/mission" class="inline-flex items-center gap-2 px-8 py-4 bg-green-700 hover:bg-green-500 text-white font-bold text-sm tracking-widest uppercase rounded transition-colors duration-150">
+            Our Mission
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/en/join" class="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-white/40 hover:border-white text-white font-bold text-sm tracking-widest uppercase rounded transition-all duration-150 hover:bg-white/10">
+            Join the Movement
+          </a>
+        </div>
+
+        <!-- Stats row -->
+        <div class="flex flex-wrap gap-10 mt-16 pt-10 border-t border-white/10">
+          <div>
+            <div class="font-display font-bold text-white text-3xl leading-none">14k<span class="text-gold-400">+</span></div>
+            <div class="text-white/50 text-xs tracking-widest uppercase mt-1">Followers</div>
+          </div>
+          <div>
+            <div class="font-display font-bold text-white text-3xl leading-none">6<span class="text-gold-400">+</span></div>
+            <div class="text-white/50 text-xs tracking-widest uppercase mt-1">Countries</div>
+          </div>
+          <div>
+            <div class="font-display font-bold text-white text-3xl leading-none">50<span class="text-gold-400">+</span></div>
+            <div class="text-white/50 text-xs tracking-widest uppercase mt-1">Dialogue Sessions</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-8 right-14 flex flex-col items-center gap-2 text-white/30 text-[10px] tracking-[0.2em] uppercase" aria-hidden="true">
+        <div class="w-[1px] h-10 bg-gradient-to-b from-white/30 to-transparent animate-pulse"></div>
+        Scroll
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================
+         BELIEF BANNER
+    ============================================================= -->
+    <section class="bg-charcoal py-14">
+      <div class="max-w-[1280px] mx-auto px-6">
+        <div class="reveal max-w-3xl mx-auto text-center">
+          <div class="flex items-center justify-center gap-3 mb-6" aria-hidden="true">
+            <div class="h-[1px] w-16 bg-gradient-to-r from-transparent to-gold-700"></div>
+            <div class="w-1.5 h-1.5 bg-gold-700 rotate-45 shrink-0"></div>
+            <div class="h-[1px] w-16 bg-gradient-to-l from-transparent to-gold-700"></div>
+          </div>
+          <blockquote>
+            <p class="font-arabic text-white/90 leading-loose mb-4" dir="rtl" style="font-size:clamp(1.1rem,2.5vw,1.5rem);">
+              «إِنَّ اللّهَ لاَ يُغَيِّرُ مَا بِقَوْمٍ حَتَّى يُغَيِّرُواْ مَا بِأَنْفُسِهِمْ»
+            </p>
+            <p class="font-display italic text-white/60 text-lg leading-relaxed">
+              "Indeed, Allah would never change a people's state of favour until they change their own state of faith."
+            </p>
+            <footer class="mt-5">
+              <span class="text-gold-400 text-xs font-bold tracking-[0.2em] uppercase">Our Belief · Mili Mehwar</span>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         ANNOUNCEMENTS
+    ============================================================= -->
+    <section class="py-20 bg-offwhite">
+      <div class="max-w-[1280px] mx-auto px-6">
+
+        <!-- Section header -->
+        <div class="reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+          <div>
+            <div class="section-eyebrow text-gold-700 text-xs font-bold tracking-[0.2em] uppercase mb-3">Latest</div>
+            <h2 class="font-display font-bold text-ink leading-tight" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Announcements</h2>
+          </div>
+          <a href="/en/announcements" class="shrink-0 inline-flex items-center gap-2 text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150 group">
+            View All
+            <svg class="w-4 h-4 transition-transform duration-150 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Cards grid: featured (large) + 2 regular -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+          <!-- Featured card — spans 2 cols on lg -->
+          <article class="card-hover lg:col-span-2 bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col">
+            <div class="card-img-wrap relative" style="aspect-ratio:16/9;">
+              <!-- Replace src with: {{ $announcement->thumbnail_url }} -->
+              <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=900&q=80" alt="National Dialogue Sacramento" class="w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+              <span class="absolute top-4 left-4 bg-green-700 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">Featured</span>
+            </div>
+            <div class="p-7 flex flex-col flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-red-700 text-xs font-bold tracking-widest uppercase">Announcement</span>
+                <span class="text-stone-400 text-xs">August 9, 2025</span>
+              </div>
+              <h3 class="font-display font-bold text-ink text-2xl leading-snug mb-3 flex-1">
+                The First National Dialogue / Meli Maraka Session Was Held in Sacramento, California
+              </h3>
+              <p class="text-stone-600 text-sm leading-relaxed mb-6">
+                Following the meetings in London, Berlin, Birmingham, and Cologne, the National Dialogue/Meli Maraka session was this time held in Sacramento, California. A large number of the country's academic, political, religious, social, and cultural figures were in attendance.
+              </p>
+              <a href="05-details-page.html" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150">
+                Read Full Article
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Right column: 2 stacked regular cards -->
+          <div class="flex flex-col gap-6">
+
+            <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col">
+              <div class="card-img-wrap" style="aspect-ratio:16/9;">
+                <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=600&q=80" alt="Berlin Dialogue" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 flex flex-col flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="text-red-700 text-xs font-bold tracking-widest uppercase">Report</span>
+                  <span class="text-stone-400 text-xs">May 8, 2025</span>
+                </div>
+                <h3 class="font-display font-bold text-ink text-lg leading-snug mb-3 flex-1">
+                  National Dialogue — Berlin: Focus on National Unity and Peace
+                </h3>
+                <a href="/en/announcements/2" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150">
+                  Read More <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </article>
+
+            <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col">
+              <div class="card-img-wrap" style="aspect-ratio:16/9;">
+                <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=600&q=80" alt="Birmingham Session" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 flex flex-col flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="text-red-700 text-xs font-bold tracking-widest uppercase">Announcement</span>
+                  <span class="text-stone-400 text-xs">July 10, 2025</span>
+                </div>
+                <h3 class="font-display font-bold text-ink text-lg leading-snug mb-3 flex-1">
+                  National Dialogue Session Held in Birmingham, UK
+                </h3>
+                <a href="/en/announcements/3" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150">
+                  Read More <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+<!-- ============================================================
+         REPORTS SECTION
+    ============================================================= -->
+    <section class="py-20 bg-cream">
+      <div class="max-w-[1280px] mx-auto px-6">
+
+        <!-- Header -->
+        <div class="reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+          <div>
+            <div class="section-eyebrow text-gold-700 text-xs font-bold tracking-[0.2em] uppercase mb-3">Publications</div>
+            <h2 class="font-display font-bold text-ink leading-tight" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Reports</h2>
+          </div>
+          <a href="/en/reports" class="shrink-0 inline-flex items-center gap-2 text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150 group">
+            View All <svg class="w-4 h-4 transition-transform duration-150 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Report cards: horizontal list style -->
+        <div class="flex flex-col gap-5">
+
+          <article class="reveal card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col sm:flex-row">
+            <div class="card-img-wrap sm:w-56 shrink-0" style="aspect-ratio:4/3;">
+              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&q=80" alt="Report cover" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6 flex flex-col justify-between flex-1">
+              <div>
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="bg-gold-100 text-gold-700 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">Report</span>
+                  <span class="text-stone-400 text-xs">September 2025</span>
+                </div>
+                <h3 class="font-display font-bold text-ink text-xl leading-snug mb-2">
+                  National Dialogue — London: Outcomes and Recommendations for Afghan Unity
+                </h3>
+                <p class="text-stone-600 text-sm leading-relaxed line-clamp-2">
+                  A comprehensive report on the outcomes of the London national dialogue session, covering political, social, and cultural recommendations submitted by participants.
+                </p>
+              </div>
+              <a href="/en/reports/1" class="read-more mt-4 text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150 self-start">
+                Download Report <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="reveal reveal-delay-1 card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col sm:flex-row">
+            <div class="card-img-wrap sm:w-56 shrink-0" style="aspect-ratio:4/3;">
+              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&q=80" alt="Report cover" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6 flex flex-col justify-between flex-1">
+              <div>
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="bg-gold-100 text-gold-700 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">Report</span>
+                  <span class="text-stone-400 text-xs">July 2025</span>
+                </div>
+                <h3 class="font-display font-bold text-ink text-xl leading-snug mb-2">
+                  Afghanistan's Path to Sovereignty: A Political Analysis
+                </h3>
+                <p class="text-stone-600 text-sm leading-relaxed line-clamp-2">
+                  An in-depth political analysis examining viable pathways toward restoring national sovereignty and democratic governance in Afghanistan.
+                </p>
+              </div>
+              <a href="/en/reports/2" class="read-more mt-4 text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150 self-start">
+                Download Report <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="reveal reveal-delay-2 card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col sm:flex-row">
+            <div class="card-img-wrap sm:w-56 shrink-0" style="aspect-ratio:4/3;">
+              <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=500&q=80" alt="Report cover" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6 flex flex-col justify-between flex-1">
+              <div>
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="bg-gold-100 text-gold-700 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">Report</span>
+                  <span class="text-stone-400 text-xs">April 2025</span>
+                </div>
+                <h3 class="font-display font-bold text-ink text-xl leading-snug mb-2">
+                  Civil Society and the Afghan Diaspora: Roles, Responsibilities, and Opportunities
+                </h3>
+                <p class="text-stone-600 text-sm leading-relaxed line-clamp-2">
+                  This report examines the growing role of the Afghan diaspora in shaping civil society, political discourse, and international advocacy for Afghanistan.
+                </p>
+              </div>
+              <a href="/en/reports/3" class="read-more mt-4 text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150 self-start">
+                Download Report <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         ARTICLES SECTION — editorial text-first layout
+    ============================================================= -->
+    <section class="py-20 bg-offwhite">
+      <div class="max-w-[1280px] mx-auto px-6">
+
+        <div class="reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+          <div>
+            <div class="section-eyebrow text-gold-700 text-xs font-bold tracking-[0.2em] uppercase mb-3">Opinion & Analysis</div>
+            <h2 class="font-display font-bold text-ink leading-tight" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Articles</h2>
+          </div>
+          <a href="/en/articles" class="shrink-0 inline-flex items-center gap-2 text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150 group">
+            View All <svg class="w-4 h-4 transition-transform duration-150 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="flex flex-col divide-y divide-stone-100">
+
+          <!-- Article row — with optional thumbnail -->
+          <article class="reveal card-hover group flex items-start gap-6 py-7 first:pt-0 last:pb-0">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-gold-700 text-[10px] font-bold tracking-widest uppercase">Political Analysis</span>
+                <span class="text-stone-400 text-xs">Oct 12, 2025</span>
+              </div>
+              <h3 class="font-display font-bold text-ink text-xl leading-snug mb-2 group-hover:text-green-700 transition-colors duration-200">
+                <a href="/en/articles/1">The Importance of National Unity in the Current Afghan Political Landscape</a>
+              </h3>
+              <p class="text-stone-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                A critical examination of why national unity remains the cornerstone of any viable political solution for Afghanistan's future and the role the diaspora must play.
+              </p>
+              <a href="/en/articles/1" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150">
+                Read Article <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+         
+          </article>
+
+          <!-- Article row — NO image (text only) -->
+          <article class="reveal reveal-delay-1 card-hover group flex items-start gap-6 py-7">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-gold-700 text-[10px] font-bold tracking-widest uppercase">Human Rights</span>
+                <span class="text-stone-400 text-xs">Sep 28, 2025</span>
+              </div>
+              <h3 class="font-display font-bold text-ink text-xl leading-snug mb-2 group-hover:text-green-700 transition-colors duration-200">
+                <a href="/en/articles/2">Women's Rights and Political Participation in Post-2021 Afghanistan</a>
+              </h3>
+              <p class="text-stone-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                Examining the systematic rollback of women's rights and what the international community and the Afghan diaspora can do to reverse course before it becomes permanent.
+              </p>
+              <a href="/en/articles/2" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150">
+                Read Article <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+            <!-- No image — intentionally absent. Layout holds fine. -->
+          </article>
+
+          <!-- Article row — with optional thumbnail -->
+          <article class="reveal reveal-delay-2 card-hover group flex items-start gap-6 py-7">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-gold-700 text-[10px] font-bold tracking-widest uppercase">Reconciliation</span>
+                <span class="text-stone-400 text-xs">Sep 5, 2025</span>
+              </div>
+              <h3 class="font-display font-bold text-ink text-xl leading-snug mb-2 group-hover:text-green-700 transition-colors duration-200">
+                <a href="/en/articles/3">Dialogue as a Tool for National Reconciliation: Lessons from History</a>
+              </h3>
+              <p class="text-stone-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                Drawing on historical precedents from South Africa, Northern Ireland, and Colombia to make the case for structured national dialogue as Afghanistan's best path forward.
+              </p>
+              <a href="/en/articles/3" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150">
+                Read Article <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         PIONEERS OF MILI MEHWAR
+    ============================================================= -->
+    <section class="py-20 bg-cream">
+      <div class="max-w-[1280px] mx-auto px-6">
+
+        <div class="reveal text-center mb-12">
+          <div class="section-eyebrow text-gold-700 text-xs font-bold tracking-[0.2em] uppercase mb-3">Leadership</div>
+          <h2 class="font-display font-bold text-ink leading-tight" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Pioneers of Mili Mehwar</h2>
+          <p class="text-stone-600 mt-3 max-w-xl mx-auto text-sm leading-relaxed">The founding figures and leaders who built and continue to guide the national movement.</p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+
+          <!-- Pioneer card — regular -->
+          <article class="reveal group flex flex-col items-center text-center">
+            <div class="relative mb-4">
+              <div class="w-24 h-24 rounded-full overflow-hidden border-[3px] border-stone-200 group-hover:border-gold-400 transition-colors duration-300 shadow-md">
+                <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=200&q=80" alt="Pioneer name" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              </div>
+            </div>
+            <h3 class="font-display font-bold text-ink text-sm leading-snug mb-1">Ahmad Shah Rahmani</h3>
+            <p class="text-green-700 text-xs font-semibold tracking-wide">Founder & Chairman</p>
+          </article>
+
+          <!-- Pioneer card — martyr variant -->
+          <article class="reveal reveal-delay-1 group flex flex-col items-center text-center">
+            <div class="relative mb-4">
+              <div class="w-24 h-24 rounded-full overflow-hidden border-[3px] border-red-700 shadow-md group-hover:shadow-[0_0_0_4px_rgba(198,40,40,0.15)] transition-all duration-300">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Martyr name" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              </div>
+              <!-- Martyr badge -->
+              <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-red-700 text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full whitespace-nowrap">Martyr</span>
+            </div>
+            <h3 class="font-display font-bold text-ink text-sm leading-snug mb-1 mt-2">Mohammad Yusuf Karimi</h3>
+            <p class="text-red-700 text-xs font-semibold tracking-wide">Pioneer & Martyr</p>
+          </article>
+
+          <article class="reveal reveal-delay-2 group flex flex-col items-center text-center">
+            <div class="relative mb-4">
+              <div class="w-24 h-24 rounded-full overflow-hidden border-[3px] border-stone-200 group-hover:border-gold-400 transition-colors duration-300 shadow-md">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80" alt="Pioneer" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              </div>
+            </div>
+            <h3 class="font-display font-bold text-ink text-sm leading-snug mb-1">Dr. Farid Siddiqui</h3>
+            <p class="text-green-700 text-xs font-semibold tracking-wide">Political Director</p>
+          </article>
+
+          <article class="reveal reveal-delay-3 group flex flex-col items-center text-center">
+            <div class="relative mb-4">
+              <div class="w-24 h-24 rounded-full overflow-hidden border-[3px] border-stone-200 group-hover:border-gold-400 transition-colors duration-300 shadow-md">
+                <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=200&q=80" alt="Pioneer" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              </div>
+            </div>
+            <h3 class="font-display font-bold text-ink text-sm leading-snug mb-1">Eng. Khalid Waziri</h3>
+            <p class="text-green-700 text-xs font-semibold tracking-wide">Secretary General</p>
+          </article>
+
+          <article class="reveal reveal-delay-3 group flex flex-col items-center text-center">
+            <div class="relative mb-4">
+              <div class="w-24 h-24 rounded-full overflow-hidden border-[3px] border-stone-200 group-hover:border-gold-400 transition-colors duration-300 shadow-md">
+                <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=200&q=80" alt="Pioneer" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              </div>
+            </div>
+            <h3 class="font-display font-bold text-ink text-sm leading-snug mb-1">Prof. Laila Ahmadzai</h3>
+            <p class="text-green-700 text-xs font-semibold tracking-wide">Cultural Affairs</p>
+          </article>
+
+        </div>
+
+        <div class="reveal text-center mt-10">
+          <a href="/en/about/pioneers" class="inline-flex items-center gap-2 px-7 py-3 border-2 border-green-700 text-green-700 hover:bg-green-700 hover:text-white font-bold text-sm tracking-widest uppercase rounded transition-all duration-200">
+            View All Pioneers
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         WHY MILI MEHWAR — full-width green section
+    ============================================================= -->
+    <section class="relative bg-green-900 py-24 overflow-hidden">
+
+      <!-- Background texture -->
+      <div class="absolute inset-0 opacity-[0.04]" style="background-image:repeating-linear-gradient(-55deg,transparent,transparent 40px,#fff 40px,#fff 41px);" aria-hidden="true"></div>
+      <!-- Gold radial glow -->
+      <div class="absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-10" style="background:radial-gradient(circle,#B8860B,transparent 70%);transform:translate(30%,-30%);" aria-hidden="true"></div>
+
+      <div class="relative z-10 max-w-[1280px] mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+          <!-- Text side -->
+          <div class="reveal">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-10 h-[1px] bg-gold-400" aria-hidden="true"></div>
+              <span class="text-gold-400 text-xs font-bold tracking-[0.22em] uppercase">Our Purpose</span>
+            </div>
+            <h2 class="font-display font-black text-white leading-tight mb-6" style="font-size:clamp(2rem,4vw,3.2rem);">
+              Why <em class="text-gold-400 not-italic">Mili Mehwar?</em>
+            </h2>
+            <p class="text-white/70 text-base leading-relaxed mb-5">
+              Afghanistan today faces a crisis of leadership, legitimacy, and national identity. Mili Mehwar was founded on the belief that lasting change can only come through organised, principled political action rooted in Afghan values.
+            </p>
+            <p class="text-white/70 text-base leading-relaxed mb-8">
+              We are not a government in exile. We are a movement of Afghan citizens — inside and outside the country — committed to building the institutional foundations for a free, just, and sovereign Afghanistan.
+            </p>
+
+            <!-- Three pillars -->
+            <div class="flex flex-col gap-4">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-gold-700/20 border border-gold-700/30 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg class="w-5 h-5 text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div>
+                  <div class="font-display font-bold text-white text-base mb-0.5">National Sovereignty</div>
+                  <div class="text-white/55 text-sm leading-relaxed">Restoring Afghanistan's independence, free from foreign interference and internal tyranny.</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-gold-700/20 border border-gold-700/30 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg class="w-5 h-5 text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div>
+                  <div class="font-display font-bold text-white text-base mb-0.5">Unity Across Divisions</div>
+                  <div class="text-white/55 text-sm leading-relaxed">Building bridges across ethnic, regional, and political lines in service of the nation.</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-gold-700/20 border border-gold-700/30 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg class="w-5 h-5 text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+                </div>
+                <div>
+                  <div class="font-display font-bold text-white text-base mb-0.5">Democratic Governance</div>
+                  <div class="text-white/55 text-sm leading-relaxed">Advocating for inclusive, representative, and accountable institutions for all Afghans.</div>
+                </div>
+              </div>
+            </div>
+
+            <a href="/en/about/why-mili-mehwar" class="inline-flex items-center gap-2 mt-10 px-8 py-4 bg-gold-700 hover:bg-gold-400 text-white font-bold text-sm tracking-widest uppercase rounded transition-colors duration-150">
+              Learn More
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- Image side -->
+          <div class="reveal reveal-delay-1 relative">
+            <div class="rounded-2xl overflow-hidden shadow-2xl aspect-[4/5]">
+              <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=700&q=80" alt="Afghan community gathering" class="w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-green-900/60 to-transparent"></div>
+            </div>
+            <!-- Floating stat card -->
+            <div class="absolute -bottom-5 -left-5 bg-white rounded-xl shadow-xl px-6 py-4">
+              <div class="font-display font-black text-green-700 text-3xl leading-none">2019</div>
+              <div class="text-stone-600 text-xs tracking-widest uppercase mt-1">Founded</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         PHOTO GALLERY TEASER
+    ============================================================= -->
+    <section class="py-20 bg-offwhite">
+      <div class="max-w-[1280px] mx-auto px-6">
+
+        <div class="reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+          <div>
+            <div class="section-eyebrow text-gold-700 text-xs font-bold tracking-[0.2em] uppercase mb-3">Visual Archive</div>
+            <h2 class="font-display font-bold text-ink leading-tight" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Photo Gallery</h2>
+          </div>
+          <a href="06-photos.html" class="shrink-0 inline-flex items-center gap-2 text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150 group">
+            View Full Gallery <svg class="w-4 h-4 transition-transform duration-150 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Masonry-style grid (CSS grid approximation) -->
+        <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-2 rounded-2xl overflow-hidden">
+
+          <!-- Large featured image: spans 2 rows and 2 cols on md -->
+          <a href="/en/gallery/photos" class="md:col-span-2 md:row-span-2 block overflow-hidden group" style="aspect-ratio:1/1;">
+            <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&q=80" alt="Gallery photo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          </a>
+
+          <a href="/en/gallery/photos" class="block overflow-hidden group" style="aspect-ratio:1/1;">
+            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=400&q=80" alt="Gallery photo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          </a>
+          <a href="/en/gallery/photos" class="block overflow-hidden group" style="aspect-ratio:1/1;">
+            <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=400&q=80" alt="Gallery photo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          </a>
+          <a href="/en/gallery/photos" class="block overflow-hidden group" style="aspect-ratio:1/1;">
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=80" alt="Gallery photo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          </a>
+          <a href="/en/gallery/photos" class="block overflow-hidden group relative" style="aspect-ratio:1/1;">
+            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&q=80" alt="Gallery photo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <!-- View more overlay on last tile -->
+            <div class="absolute inset-0 bg-ink/60 flex flex-col items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <svg class="w-8 h-8 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span class="text-xs font-bold tracking-widest uppercase">View All</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         VIDEO GALLERY TEASER
+    ============================================================= -->
+    <section class="py-20 bg-charcoal">
+      <div class="max-w-[1280px] mx-auto px-6">
+
+        <div class="reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+          <div>
+            <div class="section-eyebrow text-gold-700 text-xs font-bold tracking-[0.2em] uppercase mb-3 [&::before]:bg-gradient-to-r [&::before]:from-transparent [&::before]:to-gold-700 [&::after]:bg-gradient-to-l [&::after]:from-transparent [&::after]:to-gold-700">Media</div>
+            <h2 class="font-display font-bold text-white leading-tight" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Video Gallery</h2>
+          </div>
+          <a href="/en/gallery/videos" class="shrink-0 inline-flex items-center gap-2 text-gold-400 hover:text-gold-700 font-semibold text-sm transition-colors duration-150 group">
+            View All Videos <svg class="w-4 h-4 transition-transform duration-150 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <article class="reveal group bg-charcoal-light rounded-2xl overflow-hidden hover:-translate-y-1 transition-transform duration-300 cursor-pointer">
+            <div class="relative" style="aspect-ratio:16/9;">
+              <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=600&q=80" alt="Video thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+              <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <div class="w-14 h-14 rounded-full bg-white/15 border-2 border-white/40 flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
+                  <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+              </div>
+              <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs font-mono px-2 py-0.5 rounded">12:34</span>
+            </div>
+            <div class="p-5">
+              <div class="text-stone-400 text-xs mb-2 tracking-wide">August 2025</div>
+              <h3 class="font-display font-bold text-white text-base leading-snug">National Dialogue — Sacramento Full Session Recording</h3>
+            </div>
+          </article>
+
+          <article class="reveal reveal-delay-1 group bg-charcoal-light rounded-2xl overflow-hidden hover:-translate-y-1 transition-transform duration-300 cursor-pointer">
+            <div class="relative" style="aspect-ratio:16/9;">
+              <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600&q=80" alt="Video thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+              <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <div class="w-14 h-14 rounded-full bg-white/15 border-2 border-white/40 flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
+                  <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+              </div>
+              <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs font-mono px-2 py-0.5 rounded">8:20</span>
+            </div>
+            <div class="p-5">
+              <div class="text-stone-400 text-xs mb-2 tracking-wide">July 2025</div>
+              <h3 class="font-display font-bold text-white text-base leading-snug">Chairman's Address — Birmingham National Dialogue</h3>
+            </div>
+          </article>
+
+          <article class="reveal reveal-delay-2 group bg-charcoal-light rounded-2xl overflow-hidden hover:-translate-y-1 transition-transform duration-300 cursor-pointer">
+            <div class="relative" style="aspect-ratio:16/9;">
+              <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=600&q=80" alt="Video thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+              <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <div class="w-14 h-14 rounded-full bg-white/15 border-2 border-white/40 flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
+                  <svg class="w-6 h-6 text-white ml-1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+              </div>
+              <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs font-mono px-2 py-0.5 rounded">21:05</span>
+            </div>
+            <div class="p-5">
+              <div class="text-stone-400 text-xs mb-2 tracking-wide">May 2025</div>
+              <h3 class="font-display font-bold text-white text-base leading-snug">Berlin Dialogue — Opening Ceremony and Keynote</h3>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+ <!-- ============================================================
+         BOOK CLUBS — meeting reports, optional image
+    ============================================================= -->
+    <section class="py-20 bg-cream">
+      <div class="max-w-[1280px] mx-auto px-6">
+
+        <div class="reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+          <div>
+            <div class="section-eyebrow text-gold-700 text-xs font-bold tracking-[0.2em] uppercase mb-3">Community</div>
+            <h2 class="font-display font-bold text-ink leading-tight" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Book Clubs</h2>
+            <p class="text-stone-600 text-sm mt-2 max-w-lg">Monthly reading circles across the diaspora — reports and highlights from recent sessions.</p>
+          </div>
+          <a href="/en/book-clubs" class="shrink-0 inline-flex items-center gap-2 text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150 group">
+            View All Sessions <svg class="w-4 h-4 transition-transform duration-150 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Book Club card — WITH image -->
+          <article class="reveal card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col">
+            <!-- Image: only render this block if image exists -->
+            <div class="card-img-wrap" style="aspect-ratio:16/9;">
+              <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600&q=80" alt="Book club session" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="bg-gold-100 text-gold-700 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">Book Club</span>
+                <span class="text-stone-400 text-xs">London · Oct 2025</span>
+              </div>
+              <h3 class="font-display font-bold text-ink text-lg leading-snug mb-2 flex-1">
+                London Book Club — Session Report: "Afghanistan: A Cultural History"
+              </h3>
+              <p class="text-stone-600 text-sm leading-relaxed mb-5 line-clamp-3">
+                Twelve members gathered at the community centre in Hammersmith to discuss Louis Dupree's landmark work, focusing on chapters dealing with tribal governance structures and their modern relevance.
+              </p>
+              <a href="/en/book-clubs/1" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150 self-start">
+                Read Report <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Book Club card — NO image -->
+          <article class="reveal reveal-delay-1 card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col">
+            <!-- No image: card starts with content, gold top border accent compensates -->
+            <div class="h-1.5 bg-gradient-to-r from-gold-700 to-gold-400"></div>
+            <div class="p-6 flex flex-col flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="bg-gold-100 text-gold-700 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">Book Club</span>
+                <span class="text-stone-400 text-xs">Berlin · Sep 2025</span>
+              </div>
+              <h3 class="font-display font-bold text-ink text-lg leading-snug mb-2 flex-1">
+                Berlin Book Club — Session Report: "The Kite Runner" and Afghan Identity
+              </h3>
+              <p class="text-stone-600 text-sm leading-relaxed mb-5 line-clamp-3">
+                A rich discussion on how Hosseini's novel portrays guilt, redemption, and class in Afghan society — and whether its Western reception has shaped how the world views Afghanistan.
+              </p>
+              <a href="/en/book-clubs/2" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150 self-start">
+                Read Report <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Book Club card — WITH image -->
+          <article class="reveal reveal-delay-2 card-hover bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col">
+            <div class="card-img-wrap" style="aspect-ratio:16/9;">
+              <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80" alt="Book club session" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="bg-gold-100 text-gold-700 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">Book Club</span>
+                <span class="text-stone-400 text-xs">Sacramento · Aug 2025</span>
+              </div>
+              <h3 class="font-display font-bold text-ink text-lg leading-snug mb-2 flex-1">
+                Sacramento Book Club — Session Report: Political Philosophy and Afghan Governance
+              </h3>
+              <p class="text-stone-600 text-sm leading-relaxed mb-5 line-clamp-3">
+                Members explored Montesquieu's "The Spirit of Laws" alongside contemporary Afghan political thought, examining how classical frameworks apply to Afghanistan's unique context.
+              </p>
+              <a href="/en/book-clubs/3" class="read-more text-green-700 hover:text-green-500 font-semibold text-sm transition-colors duration-150 self-start">
+                Read Report <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+ <!-- ============================================================
+         JOIN THE MOVEMENT — full-width standalone CTA
+    ============================================================= -->
+    <section class="py-20 bg-green-700 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.05]" style="background-image:repeating-linear-gradient(-55deg,transparent,transparent 30px,#fff 30px,#fff 31px);" aria-hidden="true"></div>
+      <div class="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-15" style="background:radial-gradient(circle,#D4A017,transparent 70%);" aria-hidden="true"></div>
+      <div class="absolute -bottom-32 -left-32 w-96 h-96 rounded-full opacity-10" style="background:radial-gradient(circle,#D4A017,transparent 70%);" aria-hidden="true"></div>
+
+      <div class="relative z-10 max-w-[1280px] mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center">
+
+          <div class="reveal flex items-center justify-center gap-3 mb-6" aria-hidden="true">
+            <div class="h-[1px] w-16 bg-gradient-to-r from-transparent to-gold-400 opacity-60"></div>
+            <div class="w-1.5 h-1.5 bg-gold-400 rotate-45 shrink-0"></div>
+            <div class="h-[1px] w-16 bg-gradient-to-l from-transparent to-gold-400 opacity-60"></div>
+          </div>
+
+          <h2 class="reveal font-display font-black text-white leading-tight mb-4" style="font-size:clamp(2rem,4.5vw,3.4rem);">
+            Be Part of the <em class="text-gold-400 not-italic">Change</em>
+          </h2>
+          <p class="reveal text-white/75 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
+            Mili Mehwar is built by Afghans who believe a better future is possible. If you share our values of unity, sovereignty, and democracy — we want you with us.
+          </p>
+
+          <div class="reveal flex flex-wrap items-center justify-center gap-4">
+            <a href="/en/join" class="inline-flex items-center gap-2 px-10 py-4 bg-white text-green-700 hover:bg-gold-100 font-bold text-sm tracking-widest uppercase rounded transition-colors duration-150">
+              Join the Movement
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="/en/contact" class="inline-flex items-center gap-2 px-10 py-4 bg-transparent border-2 border-white/40 hover:border-white text-white font-bold text-sm tracking-widest uppercase rounded transition-all duration-150">
+              Contact Us
+            </a>
+          </div>
+
+          <div class="reveal mt-12 flex flex-wrap items-center justify-center gap-10">
+            <div class="text-center">
+              <div class="font-display font-black text-white text-3xl leading-none">Free</div>
+              <div class="text-white/50 text-xs tracking-widest uppercase mt-1">To Join</div>
+            </div>
+            <div class="w-[1px] h-8 bg-white/20" aria-hidden="true"></div>
+            <div class="text-center">
+              <div class="font-display font-black text-white text-3xl leading-none">6<span class="text-gold-400">+</span></div>
+              <div class="text-white/50 text-xs tracking-widest uppercase mt-1">Countries</div>
+            </div>
+            <div class="w-[1px] h-8 bg-white/20" aria-hidden="true"></div>
+            <div class="text-center">
+              <div class="font-display font-black text-white text-3xl leading-none">14k<span class="text-gold-400">+</span></div>
+              <div class="text-white/50 text-xs tracking-widest uppercase mt-1">Community</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  
+  <!-- ============================================================
+       FOOTER (same as shell)
+  ============================================================= -->
+  <footer>
+    <div class="flex h-[5px]" aria-hidden="true">
+      <div class="flex-1" style="background:#111;"></div>
+      <div class="flex-1 bg-red-700"></div>
+      <div class="flex-1 bg-green-700"></div>
+    </div>
+    <div class="bg-charcoal text-stone-200">
+      <div class="max-w-[1280px] mx-auto px-6 pt-16 pb-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+        <div class="sm:col-span-2 lg:col-span-1">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-full bg-white/10 border-2 border-gold-400 flex items-center justify-center text-lg shrink-0" aria-hidden="true">🏛️</div>
+            <div class="font-display font-bold text-lg text-white leading-none">Mili<span class="text-gold-400">Mehwar</span></div>
+          </div>
+          <p class="text-sm text-stone-400 leading-relaxed mb-6 max-w-xs">An Afghan national movement for unity, sovereignty, and democratic renewal.</p>
+          <div class="flex gap-3 mb-6">
+            <a href="https://twitter.com/milimehwar" target="_blank" rel="noopener" aria-label="X" class="w-[38px] h-[38px] rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center text-stone-400 hover:bg-green-700 hover:border-green-700 hover:text-white transition-all duration-150"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.258 5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://facebook.com/milimehwar" target="_blank" rel="noopener" aria-label="Facebook" class="w-[38px] h-[38px] rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center text-stone-400 hover:bg-green-700 hover:border-green-700 hover:text-white transition-all duration-150"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+            <a href="https://youtube.com/@milimehwar" target="_blank" rel="noopener" aria-label="YouTube" class="w-[38px] h-[38px] rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center text-stone-400 hover:bg-green-700 hover:border-green-700 hover:text-white transition-all duration-150"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          </div>
+          <div class="bg-green-700/15 border border-green-700/35 rounded-xl p-5">
+            <div class="font-display font-bold text-white text-base mb-1">Want to join us?</div>
+            <p class="text-xs text-stone-400 mb-4 leading-relaxed">Complete the online form to become a member.</p>
+            <a href="/en/join" class="inline-flex items-center gap-2 px-5 py-2.5 bg-green-700 hover:bg-green-500 text-white text-xs font-bold tracking-widest uppercase rounded transition-colors duration-150">Join Online</a>
+          </div>
+        </div>
+        <nav aria-label="Quick links">
+          <h4 class="font-display font-bold text-white text-base mb-5 pb-3 border-b border-white/[0.08]">Quick Links</h4>
+          <ul class="flex flex-col gap-3" role="list">
+            <li><a href="/en/announcements" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Announcements</a></li>
+            <li><a href="/en/reports" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Reports</a></li>
+            <li><a href="/en/articles" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Articles</a></li>
+            <li><a href="/en/gallery/photos" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Photo Gallery</a></li>
+            <li><a href="/en/gallery/videos" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Video Gallery</a></li>
+            <li><a href="/en/book-clubs" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Book Clubs</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="About">
+          <h4 class="font-display font-bold text-white text-base mb-5 pb-3 border-b border-white/[0.08]">About</h4>
+          <ul class="flex flex-col gap-3" role="list">
+            <li><a href="/en/about/mission" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Our Mission</a></li>
+            <li><a href="/en/about/pioneers" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Pioneers</a></li>
+            <li><a href="/en/about/constitution" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Constitution</a></li>
+            <li><a href="/en/about/why-mili-mehwar" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Why Mili Mehwar?</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Get involved">
+          <h4 class="font-display font-bold text-white text-base mb-5 pb-3 border-b border-white/[0.08]">Get Involved</h4>
+          <ul class="flex flex-col gap-3" role="list">
+            <li><a href="/en/join" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Join the Movement</a></li>
+            <li><a href="/en/contact" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">Contact Us</a></li>
+            <li><a href="mailto:info@milimehwar.org" class="footer-link flex items-center text-sm text-stone-400 hover:text-white transition-colors duration-150">info@milimehwar.org</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="max-w-[1280px] mx-auto px-6 py-5 border-t border-white/[0.07] flex flex-wrap items-center justify-between gap-4">
+        <p class="text-xs text-stone-600 tracking-wide">Copyright &copy; <span id="footerYear"></span> MiliMehwar — All rights reserved.</p>
+        <nav class="flex gap-6"><a href="/en/privacy" class="text-xs text-stone-600 hover:text-stone-200 transition-colors duration-150">Privacy Policy</a><a href="/en/terms" class="text-xs text-stone-600 hover:text-stone-200 transition-colors duration-150">Terms of Use</a></nav>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-8 right-8 w-11 h-11 bg-green-700 hover:bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg opacity-0 pointer-events-none -translate-y-3 transition-all duration-300 z-50" aria-label="Back to top">
+    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script>
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+    window.addEventListener('scroll', () => {
+      const sy = window.scrollY;
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      document.getElementById('scrollProgress').style.width = (docH > 0 ? (sy / docH) * 100 : 0) + '%';
+      document.getElementById('mainNav').classList.toggle('shadow-[0_4px_32px_rgba(0,0,0,0.45)]', sy > 10);
+      const btt = document.getElementById('backToTop');
+      btt.classList.toggle('opacity-0', sy <= 400);
+      btt.classList.toggle('pointer-events-none', sy <= 400);
+      btt.classList.toggle('-translate-y-3', sy <= 400);
+      btt.classList.toggle('opacity-100', sy > 400);
+      btt.classList.toggle('pointer-events-auto', sy > 400);
+      btt.classList.toggle('translate-y-0', sy > 400);
+    }, { passive: true });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.contains('is-open') ? closeMobileMenu() : openMobileMenu();
+    }
+    function openMobileMenu() {
+      const m = document.getElementById('mobileMenu'), d = document.getElementById('mobileDrawer'), b = document.getElementById('mobileBackdrop');
+      m.classList.add('is-open'); m.classList.remove('pointer-events-none'); m.setAttribute('aria-hidden','false');
+      d.classList.replace('translate-x-full','translate-x-0'); b.classList.replace('opacity-0','opacity-100');
+      document.getElementById('hamburgerBtn').setAttribute('aria-expanded','true');
+      document.getElementById('ham1').style.cssText='transform:translateY(6.5px) rotate(45deg)';
+      document.getElementById('ham2').style.opacity='0';
+      document.getElementById('ham3').style.cssText='transform:translateY(-6.5px) rotate(-45deg)';
+      document.body.style.overflow='hidden';
+    }
+    function closeMobileMenu() {
+      const m = document.getElementById('mobileMenu'), d = document.getElementById('mobileDrawer'), b = document.getElementById('mobileBackdrop');
+      d.classList.replace('translate-x-0','translate-x-full'); b.classList.replace('opacity-100','opacity-0');
+      document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false');
+      ['ham1','ham2','ham3'].forEach(id => document.getElementById(id).style.cssText='');
+      document.body.style.overflow='';
+      setTimeout(() => { m.classList.remove('is-open'); m.classList.add('pointer-events-none'); m.setAttribute('aria-hidden','true'); }, 280);
+    }
+
+    function switchLang(lang) {
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        const active = btn.dataset.lang === lang;
+        btn.setAttribute('aria-pressed', String(active));
+        if (active) { btn.classList.add('border-gold-700','bg-gold-700/10','text-gold-400'); btn.classList.remove('border-transparent','text-stone-400'); }
+        else { btn.classList.remove('border-gold-700','bg-gold-700/10','text-gold-400'); btn.classList.add('border-transparent','text-stone-400'); }
+      });
+      const html = document.documentElement;
+      if (lang === 'dr' || lang === 'ps') { html.setAttribute('dir','rtl'); html.setAttribute('lang', lang === 'dr' ? 'fa' : 'ps'); }
+      else { html.setAttribute('dir','ltr'); html.setAttribute('lang','en'); }
+    }
+
+    document.addEventListener('click', e => { if (!e.target.closest('.dropdown-parent')) document.querySelectorAll('.dropdown-parent').forEach(d => d.classList.remove('is-open')); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileMenu(); });
+  </script>
+
+</body>
+</html>
